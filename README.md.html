@@ -1,0 +1,154 @@
+<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>doc</title>
+    <style>
+      /*github.com style (c) Vasily Polovnyov <vast@whiteants.net>*/
+      pre code {
+        display: block; padding: 0.5em;
+        color: #333;
+        background: #f8f8ff
+      }
+      pre .comment,
+      pre .template_comment,
+      pre .diff .header,
+      pre .javadoc {
+        color: #998;
+        font-style: italic
+      }
+      pre .keyword,
+      pre .css .rule .keyword,
+      pre .winutils,
+      pre .javascript .title,
+      pre .nginx .title,
+      pre .subst,
+      pre .request,
+      pre .status {
+        color: #333;
+        font-weight: bold
+      }
+      pre .number,
+      pre .hexcolor,
+      pre .ruby .constant {
+        color: #099;
+      }
+      pre .string,
+      pre .tag .value,
+      pre .phpdoc,
+      pre .tex .formula {
+        color: #d14
+      }
+      pre .title,
+      pre .id {
+        color: #900;
+        font-weight: bold
+      }
+      pre .javascript .title,
+      pre .lisp .title,
+      pre .clojure .title,
+      pre .subst {
+        font-weight: normal
+      }
+      pre .class .title,
+      pre .haskell .type,
+      pre .vhdl .literal,
+      pre .tex .command {
+        color: #458;
+        font-weight: bold
+      }
+      pre .tag,
+      pre .tag .title,
+      pre .rules .property,
+      pre .django .tag .keyword {
+        color: #000080;
+        font-weight: normal
+      }
+      pre .attribute,
+      pre .variable,
+      pre .lisp .body {
+        color: #008080
+      }
+      pre .regexp {
+        color: #009926
+      }
+      pre .class {
+        color: #458;
+        font-weight: bold
+      }
+      pre .symbol,
+      pre .ruby .symbol .string,
+      pre .lisp .keyword,
+      pre .tex .special,
+      pre .prompt {
+        color: #990073
+      }
+      pre .built_in,
+      pre .lisp .title,
+      pre .clojure .built_in {
+        color: #0086b3
+      }
+      pre .preprocessor,
+      pre .pi,
+      pre .doctype,
+      pre .shebang,
+      pre .cdata {
+        color: #999;
+        font-weight: bold
+      }
+      pre .deletion {
+        background: #fdd
+      }
+      pre .addition {
+        background: #dfd
+      }
+      pre .diff .change {
+        background: #0086b3
+      }
+      pre .chunk {
+        color: #aaa
+      }
+    </style>
+  </head>
+  <body>  
+    <h1 id="web-data-connector-wrapper">Web Data Connector Wrapper</h1>
+<p><a href="https://travis-ci.org/iamEAP/web-data-connector-wrapper"><img src="https://travis-ci.org/iamEAP/web-data-connector-wrapper.svg?branch=master" alt="Build Status"></a><a href="https://badge.fury.io/js/web-data-connector-wrapper"><img src="https://badge.fury.io/js/web-data-connector-wrapper.svg" alt="npm version"></a></p>
+<p>Write an awesome description for your new module here. You can edit this file and its contents for
+your final README.md file. This template will go through the &quot;replace:dist&quot; step of the Gruntfile
+which replaces 3 variables in this file (you can add more if you like).</p>
+<ol>
+<li>wdcw.2.0.0.standalone.js : your unminimized library as produced by the &quot;browserify:standalone&quot; step in Gruntfile.js</li>
+<li>wdcw.2.0.0.standalone.min.js : your minimized library as produced by the &quot;uglify:all&quot; step in Gruntfile.js</li>
+<li>2.0.0 : the package version which is read from package.json.</li>
+</ol>
+<p>Below, there is a sample &quot;Downloads&quot; section to show you how to use these 3 variables.</p>
+<p>The output of &quot;replace:dist&quot; is your README.md file. The &quot;markdown:all&quot; step will also produce the html
+equivalent of your README.md so that you can put this on your own website.</p>
+<h2 id="downloads">Downloads</h2>
+<ul>
+<li><a href="https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.min.js">Version 2.0.0, minimized, 4.4K : https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.min.js</a></li>
+<li><a href="https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.js">Version 2.0.0, un-minimized, 13K : https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.js</a></li>
+</ul>
+<h2 id="usage">Usage</h2>
+<h3 id="browser">Browser</h3>
+<p>In any web page:</p>
+<pre><code class="lang-html">&lt;script src=&quot;http://web-data-connector-wrapper.com/wdcw.2.0.0.standalone.min.js)&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  var wdcw = require(&#39;web-data-connector-wrapper&#39;);
+  var example = new wdcw();
+
+  example.hello();
+&lt;/script&gt;
+</code></pre>
+<h3 id="node-js">Node.js</h3>
+<pre><code class="lang-js">var wdcw = require(&#39;./src/web-data-connector-wrapper.js&#39;);
+var example = new wdcw();
+
+example.hello();
+</code></pre>
+<h1 id="license">License</h1>
+<p><a href="LICENSE.md">Apache 2.0 License</a> - &copy; 2015 Eric Peterson</p>
+
+  </body>
+</html>
