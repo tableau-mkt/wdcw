@@ -2,10 +2,12 @@
 
 [![Build Status](https://travis-ci.org/tableau-mkt/wdcw.svg?branch=master)](https://travis-ci.org/tableau-mkt/wdcw)[![npm version](https://badge.fury.io/js/wdcw.svg)](https://badge.fury.io/js/wdcw)
 
-Write an awesome description for your new module here. You can edit this file and its contents for
-your final README.md file. This template will go through the "replace:dist" step of the Gruntfile
-which replaces 3 variables in this file (you can add more if you like).
+This JavaScript library aims to simplify the way you write and instantiate
+Tableau web data connectors.
 
+Still under active development! Use at your own risk.
+
+<!---
 1. wdcw.2.0.0.standalone.js : your unminimized library as produced by the "browserify:standalone" step in Gruntfile.js
 2. wdcw.2.0.0.standalone.min.js : your minimized library as produced by the "uglify:all" step in Gruntfile.js
 3. 2.0.0 : the package version which is read from package.json.
@@ -19,31 +21,232 @@ equivalent of your README.md so that you can put this on your own website.
 
 * [Version 2.0.0, minimized, 4.4K : https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.min.js](https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.min.js)
 * [Version 2.0.0, un-minimized, 13K : https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.js](https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.js)
+-->
 
-## Usage ##
-
-### Browser ###
+## Usage
 
 In any web page:
 ```html
-<script src="http://web-data-connector-wrapper.com/wdcw.2.0.0.standalone.min.js)"></script>
+// Requires ES6 Promise Shim, jQuery, and the Tableau WDC API (v2.0.0+)
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/3.2.2/es6-promise.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://connectors.tableau.com/libs/tableauwdc-2.0.0-beta.js"></script>
+<script src="/path/to/wdcw.2.0.0.standalone.min.js)"></script>
 <script>
-  var wdcw = require('web-data-connector-wrapper');
-  var example = new wdcw();
-
-  example.hello();
+  // Instantiate your WDC and supply custom WDC logic.
+  var wrapper = wdcw({
+    name: 'My Web Data Connector',
+    schema: function () {
+      return Promise.resolve([{
+        // Your schema definition here.
+      }]);
+    }
+  });
 </script>
-  ```
+```
 
+## Enhancements and differences vs. the native WDC API
+
+### Instantiation
+With the Tableau API...
+```javascript
+// Call global connector factory.
+var connector = tableau.makeConnector();
+
+// Implement connector methods.
+connector.getSchema = function (schemaCallback) {/*...*/};
+
+// Set connector name on global object and register the connector.
+tableau.connectionName = 'My Web Data Connector';
+tableau.registerConnector(connector);
+```
+
+With the WDC wrapper...
+```javascript
+// Call the global wdcw function with your WDC name/logic as configuration.
+var wrapper = wdcw({
+  name: 'My Web Data Connector',
+  schema: function () {/*...*/},
+});
+```
+
+### Multi-table handling
+With the Tableau API...
+```javascript
+connector.getData = function (table, dataDoneCallback) {
+  // Branch logic based on the table ID
+  switch (table.tableInfo.id) {
+    case: 'tableOne':
+      // Manually handle asynchronicity
+      $.getJSON('/path/to/tableOne/resource.json', function (data) {
+        table.appendRows(data);
+        dataDoneCallback();
+      });
+      break;
+
+    case: 'tableTwo':
+      $.getJSON('/path/to/tableTwo/resource.json', function (data) {
+        table.appendRows(data);
+        dataDoneCallback();
+      }
+      break;
+  }
+};
+```
+
+With the WDC wrapper...
+```javascript
+wrapper = wdcw();
+
+// Specify getData methods for each table, based on tableId.
+wrapper.registerData('tableOne', function () {
+  // WDCW table data getters expect promises to be returned.
+  return $.when($.getJSON('/path/to/tableOne/resource.json'));
+});
+
+wrapper.registerData('tableTwo', function () {
+  return return $.when($.getJSON('/path/to/tableTwo/resource.json'));
+});
+```
+
+### Data processing / filtering / transformation
+With the Tableau API...
+```javascript
+// Helper function for returning API data by page.
+function getDataForPage(pageNumber, successCallback) {
+  return $.getJSON('/path/to/resource.json?page=' + pageNumber), successCallback);
+};
+
+connector.getData = function (table, dataDoneCallback) {
+  var combinedDataSink = [],
+      deferred = [];
+
+  // Loop through 5 pages and concatenate API data to a data sink.
+  for (var i = 0; i < 5; i++) {
+    deferred.push(getDataForPage(i, function (data) {
+      // Potentially, some filtering or transformation logic would live here.
+      combinedDataSink = combinedDataSink.concat(data);
+    }));
+  }
+
+  $.when(deferred).done(function () {
+    var transformedData = combinedData;
+    // Additional filtering or transformation logic could live here.
+    table.appendRows(transformedData);
+    dataDoneCallback();
+  });
+};
+```
+
+With the WDC Wrapper...
+```javascript
+// Basically the same helper function for returning API data by page.
+function getDataForPage(pageNumber) {
+  return $.when($.getJSON('/path/to/resource.json?page=' + pageNumber));
+};
+
+var wrapper = wdcw();
+
+wrapper.registerData('someTableId', function () {
+  return Promise.all([0, 1, 2, 3, 4, 5].map(getDataForPage);
+});
+
+// Provide a postProcess method that encapsulates all processing logic.
+wrapper.registerPostProcess('someTableId', function (data) {
+  var transformedData = data;
+  // All transformation logic goes here.
+  return Promise.resolve(transformedData);
+});
+```
+
+### Dependent table data
+With the Tableau API...
+```javascript
+// Globally keep track of whether or not the first table is done loading data.
+var tableDeferred;
+
+connector.getSchema = function (schemaCallback) {
+  schemaCallback([{
+    id: 'independentTable',
+    columns: [/*...*/]
+  }, {
+    id: 'dependentTable',
+    columns: [/*...*/]
+  }]);
+};
+
+connector.getData = function (table, dataDoneCallback) {
+  switch (table.tableInfo.id) {
+    case: 'independentTable':
+      tableDeferred = $.when($.getJSON('/path/to/independentTable.json'));
+      tableDeferred.then(function (data) {
+        table.appendRows(data);
+        dataDoneCallback();
+      });
+      break;
+
+    case: 'dependentTable':
+      // Only proceed once the global tableDeferred var indicates completion.
+      tableDeferred.done(function (independentTableData) {
+        var dependentIds = [];
+
+        // Extract some sub-identifiers from each row.
+        independentTableData.forEach(function (tableRow) {
+          dependentIds = dependentIds.concat(tableRow.someIds);
+        });
+
+        // Query some endpoint using the extracted sub-identifiers as a filter.
+        $.getJSON('/path/to/dependentTable.json?whereIn=' + dependentIds.join(','), function (data) {
+          table.appendRows(data);
+          dataDoneCallback();
+        }
+      break;
+  }
+};
+```
+
+With the WDC Wrapper...
+```javascript
+var wrapper = wdcw();
+
+wrapper.registerSchema(function () {
+  return Promise.resolve([{
+    id: 'independentTable',
+    columns: [/*...*/]
+  }, {
+    id: 'dependentTable',
+    columns: [/*...*/],
+    // A magic WDC wrapper-specific schema property which causes the execution
+    // of this table's getData method to occur after its dependencies.
+    dependsOn: ['independentTable'] // WDC Wrapper magic property.
+  }]);
+});
+
+wrapper.registerData('independentTable', function () {
+  return $.when($.getJSON('/path/to/independentTable.json'));
+});
+
+// This method won't be called until after the independentTable method resolves.
+wrapper.registerData('dependentTable', function (lastToken, independentTableData) {
+  var dependentIds = [];
+
+  // Here [0] represents the first dependency. If this table depended on more
+  // than one table, additional dependencies could be accessed by incrementing.
+  independentTableData[0].forEach(function (tableRow) {
+    dependentIds = dependentIds.concat(tableRow.someIds);
+  });
+
+  return $.when($.getJSON('/path/to/dependentTable.json?whereIn=' + dependentIds.join(',')));
+});
+```
+
+<!---
 ### Node.js ###
 
 ```js
-var wdcw = require('./src/web-data-connector-wrapper.js');
+var wdcw = require('./src/wdcw.js');
 var example = new wdcw();
 
 example.hello();
 ```
-
-# License
-
-[Apache 2.0 License](LICENSE.md) - &copy; 2015 Eric Peterson
+-->
