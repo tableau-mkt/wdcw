@@ -83,6 +83,19 @@ module.exports = function(grunt) {
         }
       }
     },
+    'gh-pages': {
+      options: {
+        branch: 'gh-pages',
+        base: 'docs'
+      },
+      publish: {
+        options: {
+          repo: 'https://github.com/tableau-mkt/wdcw.git',
+          message: 'Published via gh-pages (cli)'
+        },
+        src: ['**/*']
+      }
+    },
     jscs: {
       src : [
         path.join('<%= projectparams.src_dir %>', '/**/*.js'),
@@ -227,6 +240,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-flow');
+  grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks("grunt-jscs");
   grunt.loadNpmTasks('grunt-jsdoc');
   grunt.loadNpmTasks('grunt-markdown');
@@ -237,6 +251,7 @@ module.exports = function(grunt) {
   grunt.registerTask('browsertest', ['clean:tests', 'jshint', 'jscs', 'flow', 'browserify', 'replace:browserified_tests_file', 'connect', 'mocha_phantomjs']);
   grunt.registerTask('dist', ['clean:dist', 'browserify', 'uglify']);
   grunt.registerTask('docs', ['clean:docs', 'replace:dist', 'markdown', 'jsdoc']);
+  grunt.registerTask('publish', ['docs', 'gh-pages:publish']);
   grunt.registerTask('localtest', ['clean:tests', 'jshint', 'jscs', 'flow', 'mochaTest']);
   grunt.registerTask('test', ['localtest', 'browsertest']);
   // Default task

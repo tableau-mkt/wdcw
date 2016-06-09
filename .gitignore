@@ -9,3 +9,6 @@ test/output/**/*
 # Ignore npm stuff
 npm-debug.log
 node_modules
+# Ignore grunt-gh-pages / docs stuff.
+.grunt/*
+docs/*
