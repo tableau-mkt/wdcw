@@ -200,7 +200,10 @@ wdcw.prototype.registerData = function (tableId, dataRetrievalFunction) {
  *   The table ID (as returned in your schemaFunction) associated with the data
  *   you are transforming or filtering in your postProcessFunction.
  *
- * @param {Function} postProcessFunction
+ * @param {postProcess} postProcessFunction
+ *   A function that encapsulates data post-processing logic for a particular
+ *   table provided by your connector.
+ *   @see postProcess
  *
  * @returns {wdcw}
  *   Returns itself (useful for chaining).
