@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>connector/userMethods/dataRetrieval.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Connector.html">Connector</a><ul class='methods'><li data-type='method'><a href="Connector.html#.getUsername">getUsername</a></li><li data-type='method'><a href="Connector.html#ajaxErrorHandler">ajaxErrorHandler</a></li><li data-type='method'><a href="Connector.html#getConnectionData">getConnectionData</a></li><li data-type='method'><a href="Connector.html#getDataPromise">getDataPromise</a></li><li data-type='method'><a href="Connector.html#getIncrementalExtractColumn">getIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#getPassword">getPassword</a></li><li data-type='method'><a href="Connector.html#setConnectionData">setConnectionData</a></li><li data-type='method'><a href="Connector.html#setDataPromise">setDataPromise</a></li><li data-type='method'><a href="Connector.html#setIncrementalExtractColumn">setIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#setPassword">setPassword</a></li><li data-type='method'><a href="Connector.html#setUsername">setUsername</a></li></ul></li><li><a href="wdcw.html">wdcw</a><ul class='methods'><li data-type='method'><a href="wdcw.html#getConnector">getConnector</a></li><li data-type='method'><a href="wdcw.html#registerData">registerData</a></li><li data-type='method'><a href="wdcw.html#registerInit">registerInit</a></li><li data-type='method'><a href="wdcw.html#registerPostProcess">registerPostProcess</a></li><li data-type='method'><a href="wdcw.html#registerSchema">registerSchema</a></li><li data-type='method'><a href="wdcw.html#registerShutdown">registerShutdown</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">connector/userMethods/dataRetrieval.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * Should always return a promise which resolves when data retrieval for the
+ * given table is complete. The data passed back when resolved can vary
+ * depending on your use-case, see below.
+ *
+ * @callback wdcw~dataRetrieval
+ * @this Connector
+ *
+ * @param {String|null} lastRecordToken
+ *   If this table supports incremental refreshes, the first argument will be
+ *   the last value/record of this table's incrementColumnId column. If your
+ *   table does not support incremental refreshes or if the execution context is
+ *   not an incremental refresh, this parameter will be null.
+ *
+ * @param {Array&lt;Array&lt;any>>|null} tableDependencyData
+ *   If you specified an array of tables that this table depends on (via the
+ *   dependsOn key in this table's schema definition), then this argument will
+ *   be populated with table data for each dependency. The top layer of arrays
+ *   will respect the order in which you specified the dependencies in your
+ *   schema, underneath which the actual table data resides. If your table does
+ *   not depend on the table data of other tables, this parameter will be null.
+ *
+ * @param {Function} appendRows
+ *   In some cases (for example, if you are dealing with a very large number of
+ *   records), for performance or resource usage reasons, you may wish to bypass
+ *   the WDC Wrapper's data handling and write data directly to Tableau. If this
+ *   fits your use-case, you may use this function to do so; it is identical to
+ *   the Table.appendRows method in the native Tableau WDC API's getData method.
+ *   Note that if you use this, you'll want to resolve this method with no data,
+ *   otherwise your data may be duplicated.
+ *
+ * @return {Promise&lt;Array&lt;Array&lt;any>>>|null}
+ *   In most cases, this promise should resolve with data in the format exactly
+ *   as expected by Tableau in the Table.appendRows method of the native Tableau
+ *   WDC API. Before being written to Tableau, data resolved here will be passed
+ *   directly to the post processing method you have registered with this table.
+ *   If you made use of the appendRows parameter to write data to Tableau
+ *   directly, you should return NULL here so that the WDC Wrapper does not do
+ *   any additional data writing to Tableau.
+ *
+ * @example &lt;caption>Simple data retrieval&lt;/caption>
+ * function dataCallbackForSomeTable() {
+ *   var connector = this,
+ *       filterVal = connector.getConnectionData().filter;
+ *
+ *   return $.when($.getJSON('/path/to/resource.json?filter=' + filterVal));
+ * }
+ *
+ * @example &lt;caption>Incremental refresh&lt;/caption>
+ * function dataCallbackForSomeTable(lastRecordToken) {
+ *   return $.when($.getJSON('/path/to/resource.json?afterRecord=' + lastRecordToken));
+ * }
+ *
+ * @example &lt;caption>Data retrieval for a table that depends on another&lt;/caption>
+ * function dataCallbackForSomeTable(lastRecordToken, tableDependencyData) {
+ *   var keysFromFirstTable = [];
+ *
+ *   // Aggregate some foreign key values from the dependency.
+ *   tableDependencyData[0].forEach(function (row) {
+ *     keysFromFirstTable = keysFromFirstTable.concat(row.other_ids);
+ *   });
+ *
+ *   // Retrieve data based on those keys.
+ *   return $.when($.getJSON('/path/to/resource.json?keysIn=' + keysFromFirstTable.join(',')));
+ * }
+ *
+ * @example &lt;caption>For extremely large data sets&lt;/caption>
+ * function dataCallbackForSomeTable(lastRecordToken, tableDependencyData, appendRows) {
+ *   var allRowsLoaded = [],
+ *       i;
+ *
+ *   // Iterate through some huge amount of data.
+ *   for (i=0; i &lt; 10000; i++) {
+ *     // Keep track of when each AJAX request completes.
+ *     allRowsLoaded[i] = $.getJSON('/path/to/resource.json?page=' + i, function (response) {
+ *       // As soon as we have the data, write it directly to Tableau.
+ *       appendRows(response.data);
+ *     });
+ *   }
+ *
+ *   // Resolves a value-less "promise" once all page deferreds are resolved.
+ *   return $.when(allRowsLoaded);
+ * }
+ */
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Jun 08 2016 17:53:52 GMT-0700 (PDT) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
