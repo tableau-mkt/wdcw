@@ -174,19 +174,22 @@ wdcw.prototype.registerSchema = function (schemaRetrievalFunction) {
  *   The table ID (as returned in your schemaFunction) associated with the data
  *   you are returning in your dataFunction.
  *
- * @param {Function} dataFunction
+ * @param {dataRetrieval} dataRetrievalFunction
+ *   A function that encapsulates data retrieval logic for a particular table
+ *   provided by your connector.
+ *   @see dataRetrieval
  *
  * @returns {wdcw}
  *   Returns itself (useful for chaining).
  */
-wdcw.prototype.registerData = function (tableId, dataFunction) {
+wdcw.prototype.registerData = function (tableId, dataRetrievalFunction) {
   // If there's not yet a space for this table, create it.
   if (!this.config.tables.hasOwnProperty(tableId)) {
     this.config.tables[tableId] = {};
   }
 
   // Set the data getter method for a table and return ourselves for chaining.
-  this.config.tables[tableId].getData = dataFunction;
+  this.config.tables[tableId].getData = dataRetrievalFunction;
   return this;
 };
 
