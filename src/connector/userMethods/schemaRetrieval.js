@@ -2,7 +2,7 @@
 /**
  * Should return a promise to an array of native Tableau TableInfo objects.
  *
- * @typeDef {Function} schemaRetrieval
+ * @callback wdcw~schemaRetrieval
  * @this Connector
  * @return {Promise<Array.TableInfo>}
  *

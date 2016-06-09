@@ -5,7 +5,7 @@
  * a promise that resolves to data in the format exactly as expected by Tableau
  * in the Table.appendRows method of the native Tableau WDC API.
  *
- * @typeDef {Function} postProcess
+ * @callback wdcw~postProcess
  * @this Connector
  *
  * @param {Array<Array<any>>|null} tableData

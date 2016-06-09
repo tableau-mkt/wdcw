@@ -4,7 +4,7 @@
  * given table is complete. The data passed back when resolved can vary
  * depending on your use-case, see below.
  *
- * @typeDef {Function} dataRetrieval
+ * @callback wdcw~dataRetrieval
  * @this Connector
  *
  * @param {String|null} lastRecordToken
