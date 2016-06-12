@@ -18,6 +18,9 @@
     <script src="/node_modules/mocha/mocha.js"></script>
     <script>
       'use strict';
+      if (window.initMochaPhantomJS) {
+        window.initMochaPhantomJS();
+      }
       mocha.setup('bdd')
       mocha.slow(500)
       mocha.timeout(3000)
@@ -26,12 +29,13 @@
     <!-- load test suite -->
     <script src="@@browserified_tests_js_file"></script>
 
-    <!-- kick of tests -->
+    <!-- kick off tests -->
     <script>
       if (window.mochaPhantomJS) {
-      window.mochaPhantomJS.run()
-      } else {
-      mocha.run()
+        window.mochaPhantomJS.run()
+      }
+      else {
+        mocha.run()
       }
     </script>
   </body>
