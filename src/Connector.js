@@ -138,27 +138,6 @@ Connector.prototype.setPassword = function setPassword(password) {
 };
 
 /**
- * Extension of the web data connector API that gets the incremental extract
- * column.
- */
-Connector.prototype.getIncrementalExtractColumn = function getExtractColumn() {
-  return _tableau.incrementalExtractColumn;
-};
-
-/**
- * Extension of the web data connectors API that sets the incremental extract
- * column.
- *
- * @param {string} column - The column from the data source on which incremental
- *   extracts should be based. This can be a column that represents either a
- *   DateTime or an integer.
- */
-Connector.prototype.setIncrementalExtractColumn = function setExtract(column) {
-  _tableau.incrementalExtractColumn = column;
-  return column;
-};
-
-/**
  * A generic error handler that can be used by implementors for simplicity.
  *
  * @param {Object} jqXHR
