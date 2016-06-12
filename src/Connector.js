@@ -178,7 +178,7 @@ Connector.prototype.ajaxErrorHandler = function (jqXHR, textStatus, errThrown) {
  *
  * @param e
  */
-Connector.prototype.promiseErrorWrapper = function tableauErrorWrapper(e) {
+Connector.prototype.promiseErrorHandler = function tableauErrorHandler(e) {
   if (typeof e === 'string') {
     _tableau.abortWithError(e);
   } else {

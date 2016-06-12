@@ -20,8 +20,8 @@ exports = module.exports = function factory(connector, config) {
 
     // If the provided connector wrapper has a teardown property, call it.
     tdCallback.call(connector, tableau.phase)
-      .then(shutdownCallback, connector.promiseErrorWrapper)
-      .catch(connector.promiseErrorWrapper);
+      .then(shutdownCallback, connector.promiseErrorHandler)
+      .catch(connector.promiseErrorHandler);
   };
 
 };

@@ -49,8 +49,8 @@ exports = module.exports = function factory(connector, config, $, tableau) {
     // If the provided connector wrapper has a setup property, call it with the
     // current initialization phase.
     setupCallback.call(connector, tableau.phase)
-      .then(initCallback, connector.promiseErrorWrapper)
-      .catch(connector.promiseErrorWrapper);
+      .then(initCallback, connector.promiseErrorHandler)
+      .catch(connector.promiseErrorHandler);
   };
 
 };

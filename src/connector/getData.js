@@ -72,12 +72,12 @@ exports = module.exports = function (connector, config, tableau, Promise) {
             table.appendRows
           )
         );
-      }, connector.promiseErrorWrapper)
-      .then(postProcess, connector.promiseErrorWrapper)
+      }, connector.promiseErrorHandler)
+      .then(postProcess, connector.promiseErrorHandler)
       .then(function (results) {
         table.appendRows(results || []);
         doneCallback();
-      }, connector.promiseErrorWrapper)
-      .catch(connector.promiseErrorWrapper);
+      }, connector.promiseErrorHandler)
+      .catch(connector.promiseErrorHandler);
   };
 };
