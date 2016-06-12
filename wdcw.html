@@ -104,7 +104,7 @@ configuration object.</p>
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type"><a href="wdcw.html#~config">wdcw~config</a></span>
 
 
             
@@ -114,7 +114,7 @@ configuration object.</p>
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>Declarative configuration representing your connector.</p></td>
         </tr>
 
     
@@ -155,12 +155,19 @@ configuration object.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line47">line 47</a>
+        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line49">line 49</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="wdcw.html#~config">wdcw~config</a></li>
+        </ul>
+    </dd>
     
 
     
@@ -280,7 +287,7 @@ wrapper.registerSchema(function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line121">line 121</a>
+        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line123">line 123</a>
     </li></ul></dd>
     
 
@@ -458,7 +465,7 @@ wrapper.registerSchema(function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line185">line 185</a>
+        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line187">line 187</a>
     </li></ul></dd>
     
 
@@ -618,7 +625,7 @@ wrapper.registerSchema(function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line134">line 134</a>
+        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line136">line 136</a>
     </li></ul></dd>
     
 
@@ -796,7 +803,7 @@ wrapper.registerSchema(function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line211">line 211</a>
+        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line213">line 213</a>
     </li></ul></dd>
     
 
@@ -956,7 +963,7 @@ wrapper.registerSchema(function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line164">line 164</a>
+        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line166">line 166</a>
     </li></ul></dd>
     
 
@@ -1116,7 +1123,7 @@ wrapper.registerSchema(function() {
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line148">line 148</a>
+        <a href="wdcw.js.html">wdcw.js</a>, <a href="wdcw.js.html#line150">line 150</a>
     </li></ul></dd>
     
 
@@ -1171,6 +1178,430 @@ wrapper.registerSchema(function() {
         <h3 class="subsection-title">Type Definitions</h3>
 
         
+                
+<h4 class="name" id="~config">config</h4>
+
+
+
+
+<div class="description">
+    <p>A configuration object used to instantiate wrapped Web Data Connectors. You
+may choose to provide all details on this configuration object or omit them
+and use the various methods on the wdcw class to build your connector.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The name of your web data connector as it should appear in Tableau.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>setup</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">wdcw~connectorSetup</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>teardown</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">wdcw~connectorTeardown</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>schema</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="wdcw.html#~schemaRetrieval">wdcw~schemaRetrieval</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Callback method used to retrieve schema details for your connector. If you
+  do not provide one here, you must provide one via <a href="wdcw.html#registerSchema">wdcw#registerSchema</a>.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tables</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>An object with as many properties as your data source provides tables. Its
+  keys represent table IDs. Rather than declaring them here, you may wish to
+  use the <a href="wdcw.html#registerData">wdcw#registerData</a> or <a href="wdcw.html#registerPostProcess">wdcw#registerPostProcess</a>
+  methods.</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tableId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Here, &quot;tableId&quot; is just an example; it should be the actual ID used to
+  identify a table in your connector's schema retrieval method via
+  wdcw#schemaRetrieval. You should have as many keys here as your
+  connector provides tables.</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>getData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="wdcw.html#~dataRetrieval">wdcw~dataRetrieval</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Nested under each table ID, you must provide a data retrieval method on the
+  getData property.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>postProcess</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="wdcw.html#~postProcess">wdcw~postProcess</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>You may optionally provide a method for post-processing, filtering, and any
+  other data transformation needs you may have on the postProcess method.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="connector_typedefs_wdcwConfig.js.html">connector/typedefs/wdcwConfig.js</a>, <a href="connector_typedefs_wdcwConfig.js.html#line2">line 2</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>&lt;caption>All of the basics&lt;caption>
+wdcw({
+  name: 'My Web Data Connector',
+  schema: function () {},
+  tables: {
+    tableOne: {
+      getData: function (lastRecordToken) {},
+      postProcess: function (tableOneData) {}
+    }
+  }
+});</code></pre>
+
+        <p class="code-caption">Using helper methods</p>
+    
+    <pre class="prettyprint"><code>wdcw({name: 'My Web Data Connector'})
+  .registerSchema(function () {})
+  .registerData('tableOne', function (lastRecordToken) {})
+  .registerPostProcess('tableOne', function (tableOneData) {});</code></pre>
+
+
+
+            
                 
 
     
@@ -1794,7 +2225,7 @@ in the Table.appendRows method of the native Tableau WDC API.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Wed Jun 08 2016 17:53:52 GMT-0700 (PDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Jun 12 2016 13:08:02 GMT-0700 (PDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
