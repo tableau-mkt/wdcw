@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Connector.html">Connector</a><ul class='methods'><li data-type='method'><a href="Connector.html#.getUsername">getUsername</a></li><li data-type='method'><a href="Connector.html#ajaxErrorHandler">ajaxErrorHandler</a></li><li data-type='method'><a href="Connector.html#getConnectionData">getConnectionData</a></li><li data-type='method'><a href="Connector.html#getDataPromise">getDataPromise</a></li><li data-type='method'><a href="Connector.html#getIncrementalExtractColumn">getIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#getPassword">getPassword</a></li><li data-type='method'><a href="Connector.html#setConnectionData">setConnectionData</a></li><li data-type='method'><a href="Connector.html#setDataPromise">setDataPromise</a></li><li data-type='method'><a href="Connector.html#setIncrementalExtractColumn">setIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#setPassword">setPassword</a></li><li data-type='method'><a href="Connector.html#setUsername">setUsername</a></li></ul></li><li><a href="wdcw.html">wdcw</a><ul class='methods'><li data-type='method'><a href="wdcw.html#getConnector">getConnector</a></li><li data-type='method'><a href="wdcw.html#registerData">registerData</a></li><li data-type='method'><a href="wdcw.html#registerInit">registerInit</a></li><li data-type='method'><a href="wdcw.html#registerPostProcess">registerPostProcess</a></li><li data-type='method'><a href="wdcw.html#registerSchema">registerSchema</a></li><li data-type='method'><a href="wdcw.html#registerShutdown">registerShutdown</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Connector.html">Connector</a><ul class='methods'><li data-type='method'><a href="Connector.html#.getUsername">getUsername</a></li><li data-type='method'><a href="Connector.html#ajaxErrorHandler">ajaxErrorHandler</a></li><li data-type='method'><a href="Connector.html#getConnectionData">getConnectionData</a></li><li data-type='method'><a href="Connector.html#getDataPromise">getDataPromise</a></li><li data-type='method'><a href="Connector.html#getIncrementalExtractColumn">getIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#getPassword">getPassword</a></li><li data-type='method'><a href="Connector.html#promiseErrorWrapper">promiseErrorWrapper</a></li><li data-type='method'><a href="Connector.html#setConnectionData">setConnectionData</a></li><li data-type='method'><a href="Connector.html#setDataPromise">setDataPromise</a></li><li data-type='method'><a href="Connector.html#setIncrementalExtractColumn">setIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#setPassword">setPassword</a></li><li data-type='method'><a href="Connector.html#setUsername">setUsername</a></li></ul></li><li><a href="wdcw.html">wdcw</a><ul class='methods'><li data-type='method'><a href="wdcw.html#getConnector">getConnector</a></li><li data-type='method'><a href="wdcw.html#registerData">registerData</a></li><li data-type='method'><a href="wdcw.html#registerPostProcess">registerPostProcess</a></li><li data-type='method'><a href="wdcw.html#registerSchema">registerSchema</a></li><li data-type='method'><a href="wdcw.html#registerSetup">registerSetup</a></li><li data-type='method'><a href="wdcw.html#registerTeardown">registerTeardown</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -106,7 +106,7 @@ methods that prevent the need to reach out to the global tableau object.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line23">line 23</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
@@ -206,7 +206,7 @@ methods that prevent the need to reach out to the global tableau object.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line96">line 96</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line97">line 97</a>
     </li></ul></dd>
     
 
@@ -259,7 +259,7 @@ methods that prevent the need to reach out to the global tableau object.</p>
 
     
 
-    <h4 class="name" id="ajaxErrorHandler"><span class="type-signature"></span>ajaxErrorHandler<span class="signature">(jqXHR, textStatus, errorThrown)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ajaxErrorHandler"><span class="type-signature"></span>ajaxErrorHandler<span class="signature">(jqXHR, textStatus, errThrown)</span><span class="type-signature"></span></h4>
 
     
 
@@ -308,7 +308,7 @@ methods that prevent the need to reach out to the global tableau object.</p>
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
             
@@ -348,7 +348,7 @@ methods that prevent the need to reach out to the global tableau object.</p>
 
         <tr>
             
-                <td class="name"><code>errorThrown</code></td>
+                <td class="name"><code>errThrown</code></td>
             
 
             <td class="type">
@@ -436,7 +436,7 @@ methods that prevent the need to reach out to the global tableau object.</p>
 
     
 
-    <h4 class="name" id="getConnectionData"><span class="type-signature"></span>getConnectionData<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="getConnectionData"><span class="type-signature"></span>getConnectionData<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -488,7 +488,7 @@ data getting for the implementor.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line68">line 68</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line69">line 69</a>
     </li></ul></dd>
     
 
@@ -534,7 +534,7 @@ data getting for the implementor.</p>
     </dt>
     <dd>
         
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -640,7 +640,7 @@ data getting for the implementor.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line50">line 50</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -741,7 +741,7 @@ column.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line143">line 143</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line144">line 144</a>
     </li></ul></dd>
     
 
@@ -823,7 +823,7 @@ column.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line120">line 120</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line121">line 121</a>
     </li></ul></dd>
     
 
@@ -876,7 +876,133 @@ column.</p>
 
     
 
-    <h4 class="name" id="setConnectionData"><span class="type-signature"></span>setConnectionData<span class="signature">(data)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    <h4 class="name" id="promiseErrorWrapper"><span class="type-signature"></span>promiseErrorWrapper<span class="signature">(e)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Generic error handler that can be passed to any Promise error handler.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line181">line 181</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="setConnectionData"><span class="type-signature"></span>setConnectionData<span class="signature">(data)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -926,7 +1052,7 @@ data setting for the implementor.</p>
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
             
@@ -936,8 +1062,9 @@ data setting for the implementor.</p>
 
             
 
-            <td class="description last"><p>The data that's intended to be set for this connection. Keys are assumed
-  to be form input names; values are assumed to be form input values.</p></td>
+            <td class="description last"><p>The data that's intended to be set for this
+  connection. Keys are assumed to be form input names; values are assumed to
+  be form input values.</p></td>
         </tr>
 
     
@@ -978,7 +1105,7 @@ data setting for the implementor.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line85">line 85</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line86">line 86</a>
     </li></ul></dd>
     
 
@@ -1023,7 +1150,7 @@ data setting for the implementor.</p>
     </dt>
     <dd>
         
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -1147,7 +1274,7 @@ data setting for the implementor.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line40">line 40</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line41">line 41</a>
     </li></ul></dd>
     
 
@@ -1256,9 +1383,9 @@ column.</p>
 
             
 
-            <td class="description last"><p>The column from the data source on which incremental extracts should be
-  based. This can be a column that represents either a DateTime or an
-  integer.</p></td>
+            <td class="description last"><p>The column from the data source on which incremental
+  extracts should be based. This can be a column that represents either a
+  DateTime or an integer.</p></td>
         </tr>
 
     
@@ -1389,8 +1516,9 @@ column.</p>
 
             
 
-            <td class="description last"><p>The password or other sensitive connection information to be associated
-  with this connection. The value is encrypted and stored by tableau.</p></td>
+            <td class="description last"><p>The password or other sensitive connection
+  information to be associated with this connection. The value is encrypted
+  and stored by tableau.</p></td>
         </tr>
 
     
@@ -1431,7 +1559,7 @@ column.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line134">line 134</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line135">line 135</a>
     </li></ul></dd>
     
 
@@ -1584,7 +1712,7 @@ column.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line109">line 109</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line110">line 110</a>
     </li></ul></dd>
     
 
@@ -1650,7 +1778,7 @@ column.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Jun 12 2016 13:08:02 GMT-0700 (PDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Jun 12 2016 16:40:56 GMT-0700 (PDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

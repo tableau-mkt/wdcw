@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Connector.html">Connector</a><ul class='methods'><li data-type='method'><a href="Connector.html#.getUsername">getUsername</a></li><li data-type='method'><a href="Connector.html#ajaxErrorHandler">ajaxErrorHandler</a></li><li data-type='method'><a href="Connector.html#getConnectionData">getConnectionData</a></li><li data-type='method'><a href="Connector.html#getDataPromise">getDataPromise</a></li><li data-type='method'><a href="Connector.html#getIncrementalExtractColumn">getIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#getPassword">getPassword</a></li><li data-type='method'><a href="Connector.html#setConnectionData">setConnectionData</a></li><li data-type='method'><a href="Connector.html#setDataPromise">setDataPromise</a></li><li data-type='method'><a href="Connector.html#setIncrementalExtractColumn">setIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#setPassword">setPassword</a></li><li data-type='method'><a href="Connector.html#setUsername">setUsername</a></li></ul></li><li><a href="wdcw.html">wdcw</a><ul class='methods'><li data-type='method'><a href="wdcw.html#getConnector">getConnector</a></li><li data-type='method'><a href="wdcw.html#registerData">registerData</a></li><li data-type='method'><a href="wdcw.html#registerInit">registerInit</a></li><li data-type='method'><a href="wdcw.html#registerPostProcess">registerPostProcess</a></li><li data-type='method'><a href="wdcw.html#registerSchema">registerSchema</a></li><li data-type='method'><a href="wdcw.html#registerShutdown">registerShutdown</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Connector.html">Connector</a><ul class='methods'><li data-type='method'><a href="Connector.html#.getUsername">getUsername</a></li><li data-type='method'><a href="Connector.html#ajaxErrorHandler">ajaxErrorHandler</a></li><li data-type='method'><a href="Connector.html#getConnectionData">getConnectionData</a></li><li data-type='method'><a href="Connector.html#getDataPromise">getDataPromise</a></li><li data-type='method'><a href="Connector.html#getIncrementalExtractColumn">getIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#getPassword">getPassword</a></li><li data-type='method'><a href="Connector.html#promiseErrorWrapper">promiseErrorWrapper</a></li><li data-type='method'><a href="Connector.html#setConnectionData">setConnectionData</a></li><li data-type='method'><a href="Connector.html#setDataPromise">setDataPromise</a></li><li data-type='method'><a href="Connector.html#setIncrementalExtractColumn">setIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#setPassword">setPassword</a></li><li data-type='method'><a href="Connector.html#setUsername">setUsername</a></li></ul></li><li><a href="wdcw.html">wdcw</a><ul class='methods'><li data-type='method'><a href="wdcw.html#getConnector">getConnector</a></li><li data-type='method'><a href="wdcw.html#registerData">registerData</a></li><li data-type='method'><a href="wdcw.html#registerPostProcess">registerPostProcess</a></li><li data-type='method'><a href="wdcw.html#registerSchema">registerSchema</a></li><li data-type='method'><a href="wdcw.html#registerSetup">registerSetup</a></li><li data-type='method'><a href="wdcw.html#registerTeardown">registerTeardown</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -140,7 +140,12 @@ function wdcw(config) {
    * @param {Object} table
    * @param {Function} doneCallback
    */
-  connector.getData = require('./connector/getData')(connector, config, tableau, Promise);
+  connector.getData = require('./connector/getData')(
+    connector,
+    config,
+    tableau,
+    Promise
+  );
 
   /**
    * Register a submit handler and take care of the following on behalf of the
@@ -168,26 +173,28 @@ function wdcw(config) {
 /**
  * Register custom initialization logic on the connector.
  *
- * @param {Function} initFunction
+ * @param {wdcw~connectorSetup} setupFunction - A function that encapsulates all
+ *   setup logic for your connector. @see wdcw~connectorSetup
  *
  * @returns {wdcw}
  *   Returns itself (useful for chaining).
  */
-wdcw.prototype.registerInit = function (initFunction) {
+wdcw.prototype.registerSetup = function (setupFunction) {
   // Set the setup/initialization method and return ourselves for chaining.
-  this.config.setup = initFunction;
+  this.config.setup = setupFunction;
   return this;
 };
 
 /**
  * Register custom shutdown logic on the connector.
  *
- * @param {Function} shutdownFunction
+ * @param {wdcw~connectorTeardown} shutdownFunction - A function that encapsulates
+ *   all teardown logic for your connector. @see wdcw~connectorTeardown
  *
  * @returns {wdcw}
  *   Returns itself (useful for chaining).
  */
-wdcw.prototype.registerShutdown = function (shutdownFunction) {
+wdcw.prototype.registerTeardown = function (shutdownFunction) {
   // Set the teardown/shutdown method and return ourselves for chaining.
   this.config.teardown = shutdownFunction;
   return this;
@@ -196,8 +203,8 @@ wdcw.prototype.registerShutdown = function (shutdownFunction) {
 /**
  * Register custom schema retrieval logic on the connector.
  *
- * @param {wdcw~schemaRetrieval} schemaRetrievalFunction
- *   A function that encapsulates schema retrieval logic for your connector.
+ * @param {wdcw~schemaRetrieval} schemaRetrievalFunction - A function that
+ *   encapsulates schema retrieval logic for your connector.
  *   @see wdcw~schemaRetrieval
  *
  * @returns {wdcw}
@@ -212,14 +219,12 @@ wdcw.prototype.registerSchema = function (schemaRetrievalFunction) {
 /**
  * Register custom data retrieval logic for a particular table on the connector.
  *
- * @param {string} tableId
- *   The table ID (as returned in your schemaFunction) associated with the data
- *   you are returning in your dataFunction.
+ * @param {string} tableId - The table ID (as returned in your schemaFunction)
+ *   associated with the data you are returning in your dataFunction.
  *
- * @param {wdcw~dataRetrieval} dataRetrievalFunction
- *   A function that encapsulates data retrieval logic for a particular table
- *   provided by your connector.
- *   @see wdcw~dataRetrieval
+ * @param {wdcw~dataRetrieval} dataRetrievalFunction - A function that
+ *   encapsulates data retrieval logic for a particular table provided by your
+ *   connector. @see wdcw~dataRetrieval
  *
  * @returns {wdcw}
  *   Returns itself (useful for chaining).
@@ -238,14 +243,13 @@ wdcw.prototype.registerData = function (tableId, dataRetrievalFunction) {
 /**
  * Register custom post-processing logic for a particular table on the connector.
  *
- * @param {string} tableId
- *   The table ID (as returned in your schemaFunction) associated with the data
- *   you are transforming or filtering in your postProcessFunction.
+ * @param {string} tableId - The table ID (as returned in your schemaFunction)
+ *   associated with the data you are transforming or filtering in your
+ *   postProcessFunction.
  *
- * @param {wdcw~postProcess} postProcessFunction
- *   A function that encapsulates data post-processing logic for a particular
- *   table provided by your connector.
- *   @see wdcw~postProcess
+ * @param {wdcw~postProcess} postProcessFunction - A function that encapsulates
+ *   data post-processing logic for a particular table provided by your
+ *   connector. @see wdcw~postProcess
  *
  * @returns {wdcw}
  *   Returns itself (useful for chaining).
@@ -272,7 +276,7 @@ wdcw.prototype.registerPostProcess = function (tableId, postProcessFunction) {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Jun 12 2016 13:08:02 GMT-0700 (PDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Jun 12 2016 16:40:56 GMT-0700 (PDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
