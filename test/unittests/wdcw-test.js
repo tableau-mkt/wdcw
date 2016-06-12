@@ -22,7 +22,7 @@ describe('wdcw', function () {
     var wrapper = new wdcw();
 
     // We pass a custom setup method which immediately resolves.
-    wrapper.registerInit(function customInitMethod(phase) {
+    wrapper.registerSetup(function customInitMethod(phase) {
       return Promise.resolve();
     });
 
@@ -37,7 +37,7 @@ describe('wdcw', function () {
     var wrapper = new wdcw();
 
     // We pass a custom shutdown method which immediately resolves.
-    wrapper.registerShutdown(function customShutdownMethod() {
+    wrapper.registerTeardown(function customShutdownMethod() {
       return Promise.resolve();
     });
 

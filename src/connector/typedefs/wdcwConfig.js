@@ -10,8 +10,14 @@
  *   The name of your web data connector as it should appear in Tableau.
  *
  * @property {wdcw~connectorSetup} [setup]
+ *   Callback method used to register custom initialization logic for your
+ *   connector. If you do not provide one here, you may optionally provide one
+ *   via {@link wdcw#conectorSetup}.
  *
  * @property {wdcw~connectorTeardown} [teardown]
+ *   Callback method used to register custom shutdown logic for your connector.
+ *   If you do not provide on here, you may optionally provide one via
+ *   {@link wdcw#connectorTeardown}.
  *
  * @property {wdcw~schemaRetrieval} [schema]
  *   Callback method used to retrieve schema details for your connector. If you

@@ -133,26 +133,28 @@ function wdcw(config) {
 /**
  * Register custom initialization logic on the connector.
  *
- * @param {Function} initFunction
+ * @param {wdcw~connectorSetup} setupFunction - A function that encapsulates all
+ *   setup logic for your connector. @see wdcw~connectorSetup
  *
  * @returns {wdcw}
  *   Returns itself (useful for chaining).
  */
-wdcw.prototype.registerInit = function (initFunction) {
+wdcw.prototype.registerSetup = function (setupFunction) {
   // Set the setup/initialization method and return ourselves for chaining.
-  this.config.setup = initFunction;
+  this.config.setup = setupFunction;
   return this;
 };
 
 /**
  * Register custom shutdown logic on the connector.
  *
- * @param {Function} shutdownFunction
+ * @param {wdcw~connectorTeardown} shutdownFunction - A function that encapsulates
+ *   all teardown logic for your connector. @see wdcw~connectorTeardown
  *
  * @returns {wdcw}
  *   Returns itself (useful for chaining).
  */
-wdcw.prototype.registerShutdown = function (shutdownFunction) {
+wdcw.prototype.registerTeardown = function (shutdownFunction) {
   // Set the teardown/shutdown method and return ourselves for chaining.
   this.config.teardown = shutdownFunction;
   return this;
