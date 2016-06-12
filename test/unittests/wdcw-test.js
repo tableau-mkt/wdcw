@@ -17,34 +17,35 @@ chai.config.includeStack = true;
 chai.config.truncateThreshold = 0;
 
 describe('wdcw', function () {
-  var noop = function () {};
 
   it('wraps custom init methods', function (done) {
     var wrapper = new wdcw();
 
-    // We pass a custom init method which calls the mocha done() callback. If
-    // the test completes, then we know the addInit method successfully wrapped
-    // the provided method. If it failed, the test would time out.
-    wrapper.registerInit(function customInitMethod(phase, doneCallback) {
-      done();
+    // We pass a custom setup method which immediately resolves.
+    wrapper.registerInit(function customInitMethod(phase) {
+      return Promise.resolve();
     });
 
-    // Trigger the connectors's init method as if we were Tableau.
-    wrapper.getConnector().init(noop);
+    // Trigger the connectors's init method as if we were Tableau. Use the done
+    // callback as if it were Tableau's init done callback. If the test completes,
+    // then we know the method was successfully wrapped. If it failed, the test
+    // would time out.
+    wrapper.getConnector().init(done);
   });
 
   it('wraps custom shutdown methods', function (done) {
     var wrapper = new wdcw();
 
-    // We pass a custom shutdown method which calls the mocha done() callback.
-    // If the test completes, then we know the addShutdown method successfully
-    // wrapped the provided method. If it failed, the test would time out.
-    wrapper.registerShutdown(function customShutdownMethod(doneCallback) {
-      done();
+    // We pass a custom shutdown method which immediately resolves.
+    wrapper.registerShutdown(function customShutdownMethod() {
+      return Promise.resolve();
     });
 
-    // Trigger the connectors's shutDown method as if we were Tableau.
-    wrapper.getConnector().shutdown(noop);
+    // Trigger the connectors's shutDown method as if we were Tableau. Use the
+    // done callback as if it were Tableau's shutdown done callback. If the test
+    // completes, then we know the method was successfully wrapped. If it failed,
+    // the test would time out.
+    wrapper.getConnector().shutdown(done);
   });
 
   it('wraps custom schema methods', function (done) {
