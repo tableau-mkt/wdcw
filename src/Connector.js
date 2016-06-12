@@ -18,6 +18,7 @@ var _tableau,
 /**
  * A native Tableau web data connector object, decorated with several utility
  * methods that prevent the need to reach out to the global tableau object.
+ *
  * @class
  */
 function Connector(tableau) {
@@ -59,7 +60,7 @@ Connector.prototype.getDataPromise = function getDataPromise(tableId) {
  * Extension of the web data connector API that handles complex connection
  * data getting for the implementor.
  *
- * @returns {object}
+ * @returns {Object}
  *   An object representing connection data. Keys are assumed to be form input
  *   names; values are assumed to be form input values.
  *
@@ -73,11 +74,11 @@ Connector.prototype.getConnectionData = function getConnectionData() {
  * Extension of the web data connector API that handles complex connection
  * data setting for the implementor.
  *
- * @param {object} data
- *   The data that's intended to be set for this connection. Keys are assumed
- *   to be form input names; values are assumed to be form input values.
+ * @param {Object} data - The data that's intended to be set for this
+ *   connection. Keys are assumed to be form input names; values are assumed to
+ *   be form input values.
  *
- * @returns {object}
+ * @returns {Object}
  *   Returns the data that was set.
  *
  * @see connector.getConnectionData
@@ -124,9 +125,9 @@ Connector.prototype.getPassword = function getPassword() {
 /**
  * Extension of the web data connector API that sets the connection password.
  *
- * @param {string} password
- *   The password or other sensitive connection information to be associated
- *   with this connection. The value is encrypted and stored by tableau.
+ * @param {string} password - The password or other sensitive connection
+ *   information to be associated with this connection. The value is encrypted
+ *   and stored by tableau.
  *
  * @returns {string}
  *   The password now associated with this connection.
@@ -148,12 +149,11 @@ Connector.prototype.getIncrementalExtractColumn = function getExtractColumn() {
  * Extension of the web data connectors API that sets the incremental extract
  * column.
  *
- * @param {string} column
- *   The column from the data source on which incremental extracts should be
- *   based. This can be a column that represents either a DateTime or an
- *   integer.
+ * @param {string} column - The column from the data source on which incremental
+ *   extracts should be based. This can be a column that represents either a
+ *   DateTime or an integer.
  */
-Connector.prototype.setIncrementalExtractColumn = function setExtractColumn(column) {
+Connector.prototype.setIncrementalExtractColumn = function setExtract(column) {
   _tableau.incrementalExtractColumn = column;
   return column;
 };
@@ -161,18 +161,23 @@ Connector.prototype.setIncrementalExtractColumn = function setExtractColumn(colu
 /**
  * A generic error handler that can be used by implementors for simplicity.
  *
- * @param {object} jqXHR
+ * @param {Object} jqXHR
  * @param {string} textStatus
- * @param {string} errorThrown
+ * @param {string} errThrown
  */
-Connector.prototype.ajaxErrorHandler = function (jqXHR, textStatus, errorThrown) {
+Connector.prototype.ajaxErrorHandler = function (jqXHR, textStatus, errThrown) {
   var message = 'There was a problem retrieving data: "' +
       textStatus + '" with error thrown: "' +
-      errorThrown + '"';
+      errThrown + '"';
 
   _tableau.abortWithError(message);
 };
 
+/**
+ * Generic error handler that can be passed to any Promise error handler.
+ *
+ * @param e
+ */
 Connector.prototype.promiseErrorWrapper = function tableauErrorWrapper(e) {
   if (typeof e === 'string') {
     _tableau.abortWithError(e);

@@ -7,7 +7,7 @@
  * @callback wdcw~dataRetrieval
  * @this Connector
  *
- * @param {String|null} lastRecordToken
+ * @param {?string} lastRecordToken
  *   If this table supports incremental refreshes, the first argument will be
  *   the last value/record of this table's incrementColumnId column. If your
  *   table does not support incremental refreshes or if the execution context is

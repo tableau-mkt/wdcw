@@ -100,7 +100,12 @@ function wdcw(config) {
    * @param {Object} table
    * @param {Function} doneCallback
    */
-  connector.getData = require('./connector/getData')(connector, config, tableau, Promise);
+  connector.getData = require('./connector/getData')(
+    connector,
+    config,
+    tableau,
+    Promise
+  );
 
   /**
    * Register a submit handler and take care of the following on behalf of the
@@ -156,8 +161,8 @@ wdcw.prototype.registerShutdown = function (shutdownFunction) {
 /**
  * Register custom schema retrieval logic on the connector.
  *
- * @param {wdcw~schemaRetrieval} schemaRetrievalFunction
- *   A function that encapsulates schema retrieval logic for your connector.
+ * @param {wdcw~schemaRetrieval} schemaRetrievalFunction - A function that
+ *   encapsulates schema retrieval logic for your connector.
  *   @see wdcw~schemaRetrieval
  *
  * @returns {wdcw}
@@ -172,14 +177,12 @@ wdcw.prototype.registerSchema = function (schemaRetrievalFunction) {
 /**
  * Register custom data retrieval logic for a particular table on the connector.
  *
- * @param {string} tableId
- *   The table ID (as returned in your schemaFunction) associated with the data
- *   you are returning in your dataFunction.
+ * @param {string} tableId - The table ID (as returned in your schemaFunction)
+ *   associated with the data you are returning in your dataFunction.
  *
- * @param {wdcw~dataRetrieval} dataRetrievalFunction
- *   A function that encapsulates data retrieval logic for a particular table
- *   provided by your connector.
- *   @see wdcw~dataRetrieval
+ * @param {wdcw~dataRetrieval} dataRetrievalFunction - A function that
+ *   encapsulates data retrieval logic for a particular table provided by your
+ *   connector. @see wdcw~dataRetrieval
  *
  * @returns {wdcw}
  *   Returns itself (useful for chaining).
@@ -198,14 +201,13 @@ wdcw.prototype.registerData = function (tableId, dataRetrievalFunction) {
 /**
  * Register custom post-processing logic for a particular table on the connector.
  *
- * @param {string} tableId
- *   The table ID (as returned in your schemaFunction) associated with the data
- *   you are transforming or filtering in your postProcessFunction.
+ * @param {string} tableId - The table ID (as returned in your schemaFunction)
+ *   associated with the data you are transforming or filtering in your
+ *   postProcessFunction.
  *
- * @param {wdcw~postProcess} postProcessFunction
- *   A function that encapsulates data post-processing logic for a particular
- *   table provided by your connector.
- *   @see wdcw~postProcess
+ * @param {wdcw~postProcess} postProcessFunction - A function that encapsulates
+ *   data post-processing logic for a particular table provided by your
+ *   connector. @see wdcw~postProcess
  *
  * @returns {wdcw}
  *   Returns itself (useful for chaining).

@@ -1,5 +1,11 @@
 
-exports = module.exports = function factory(connector, config, tableau, Promise) {
+exports = module.exports = function (connector, config, tableau, Promise) {
+  /**
+   * Wraps implementor's getData and post-process callbacks.
+   *
+   * @param table
+   * @param {Function} doneCallback
+   */
   return function callConnectorGetData(table, doneCallback) {
     var tableId = table.tableInfo.id,
         dependencies = table.tableInfo.dependsOn,
@@ -25,6 +31,12 @@ exports = module.exports = function factory(connector, config, tableau, Promise)
 
     // Otherwise, just pass the data through.
     else {
+      /**
+       * Default post-processing function; passes data straight through.
+       *
+       * @param data
+       * @returns {Promise}
+       */
       postProcess = function passThru(data) {return Promise.resolve(data);};
     }
 

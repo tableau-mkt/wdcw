@@ -50,7 +50,7 @@
   },
   "main": "src/wdcw.js",
   "scripts": {
-    "test": "grunt browsertest --force"
+    "test": "grunt browsertest"
   },
   "tonicExample": "var example = require('web-data-connector-wrapper');",
   "browserify": {

@@ -6,7 +6,7 @@
  *
  * @typedef {Object} wdcw~config
  *
- * @property {String} name
+ * @property {string} name
  *   The name of your web data connector as it should appear in Tableau.
  *
  * @property {wdcw~connectorSetup} [setup]

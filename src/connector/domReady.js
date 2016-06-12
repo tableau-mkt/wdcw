@@ -1,6 +1,16 @@
 
 exports = module.exports = function factory(connector, config, tableau, $) {
+
+  /**
+   * Method to be fired on document ready. Handles most non-init UI bindings.
+   */
   return function connectorDocumentReady() {
+    /**
+     * Connection form submit handler; handles tableau.submit and some data
+     * serialization tasks.
+     *
+     * @param e - the jQuery event.
+     */
     $('form').submit(function connectorFormSubmitHandler(e) {
       var $fields = $('input, select, textarea')
             .not('[type="password"],[type="submit"],[name="username"]'),
@@ -10,7 +20,9 @@ exports = module.exports = function factory(connector, config, tableau, $) {
 
       e.preventDefault();
 
-      // Format connection data according to assumptions.
+      /**
+       * Format connection data according to assumptions.
+       */
       $fields.map(function getValuesFromFields() {
         var $this = $(this);
         name = $this.attr('name');
@@ -49,4 +61,5 @@ exports = module.exports = function factory(connector, config, tableau, $) {
       tableau.submit();
     });
   };
+
 };

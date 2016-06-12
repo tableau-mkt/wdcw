@@ -1,7 +1,4 @@
 /**
- * @copyright Copyright (c) 2015, ProjectAgama, All Rights Reserved.
- * @author Eric Peterson <epeterson@tableausoftware.com>
- *
  * @file wdcw Unit Test
  */
 

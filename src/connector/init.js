@@ -1,5 +1,11 @@
 
 exports = module.exports = function factory(connector, config, $, tableau) {
+
+  /**
+   * Wraps implementor's initialization logic.
+   *
+   * @param {Function} initCallback
+   */
   return function callConnectorInit(initCallback) {
     var data = this.getConnectionData(),
         $input,
@@ -33,6 +39,9 @@ exports = module.exports = function factory(connector, config, $, tableau) {
     // If the provided connector wrapper has a setup property, call it with the
     // current initialization phase.
     if (config.hasOwnProperty('setup')) {
+      /**
+       * Call the implementor's setup logic, then register to Tableau we're done.
+       */
       config.setup.call(this, tableau.phase, function setUpComplete() {
         initCallback();
       });
@@ -40,4 +49,5 @@ exports = module.exports = function factory(connector, config, $, tableau) {
       initCallback();
     }
   };
+
 };

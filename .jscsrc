@@ -1,8 +1,9 @@
 {
   "preset": "airbnb",
-  "excludeFiles": ["test/output/**", "node_modules/**"],
+  "excludeFiles": ["test/**/*", "node_modules/**"],
   "maximumLineLength": {"value": 80, "allExcept": ["comments"]},
   "requireCapitalizedConstructors": false,
+  "disallowMultipleVarDecl": false,
   "plugins": ["jscs-jsdoc"],
   "jsDoc": {
     "checkAnnotations": {
