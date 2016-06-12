@@ -2,12 +2,22 @@
 exports = module.exports = function factory(connector, config, $, tableau) {
 
   /**
+   * No-op promise callback.
+   *
+   * @returns {Promise}
+   */
+  function noop() {
+    return Promise.resolve();
+  }
+
+  /**
    * Wraps implementor's initialization logic.
    *
    * @param {Function} initCallback
    */
   return function callConnectorInit(initCallback) {
     var data = this.getConnectionData(),
+        setupCallback = config.hasOwnProperty('setup') ? config.setup : noop,
         $input,
         key;
 
@@ -38,16 +48,9 @@ exports = module.exports = function factory(connector, config, $, tableau) {
 
     // If the provided connector wrapper has a setup property, call it with the
     // current initialization phase.
-    if (config.hasOwnProperty('setup')) {
-      /**
-       * Call the implementor's setup logic, then register to Tableau we're done.
-       */
-      config.setup.call(this, tableau.phase, function setUpComplete() {
-        initCallback();
-      });
-    } else {
-      initCallback();
-    }
+    setupCallback.call(connector, tableau.phase)
+      .then(initCallback, connector.promiseErrorWrapper)
+      .catch(connector.promiseErrorWrapper);
   };
 
 };
