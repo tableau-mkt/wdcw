@@ -21,7 +21,9 @@ var $ = require('jquery'),
  * Constructs a new web data connector wrapper object, given a WDC wrapper
  * configuration object.
  *
- * @param {Object} config
+ * @param {wdcw~config} config
+ *   Declarative configuration representing your connector.
+ *   @see wdcw~config
  *
  * @constructor
  *
