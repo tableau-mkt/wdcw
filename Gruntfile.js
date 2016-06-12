@@ -172,7 +172,7 @@ module.exports = function(grunt) {
       all: {
         options: {
           reporter: 'tap',
-          output: path.join('<%= projectparams.unittests_output_dir %>',
+          output: process.env.TRAVIS ? null : path.join('<%= projectparams.unittests_output_dir %>',
                               '<%= projectparams.unittests_browsertest_results_file %>'),
           urls: [
             path.join('http://127.0.0.1:8000/',
