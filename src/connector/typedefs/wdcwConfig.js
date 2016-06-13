@@ -9,6 +9,14 @@
  * @property {string} name
  *   The name of your web data connector as it should appear in Tableau.
  *
+ * @property {string} [authType]
+ *   The type of authentication that your connector uses. One of:
+ *   - none: this value is assumed if you don't provide one.
+ *   - basic: this will cause Tableau to show a username/password connection
+ *     dialogue to users in some refresh scenarios.
+ *   - custom: this will let Tableau know to call your connector in an "auth"
+ *     phase if it needs to (rather than showing the basic auth dialogue).
+ *
  * @property {wdcw~connectorSetup} [setup]
  *   Callback method used to register custom initialization logic for your
  *   connector. If you do not provide one here, you may optionally provide one
@@ -46,6 +54,7 @@
  * @example <caption>All of the basics<caption>
  * wdcw({
  *   name: 'My Web Data Connector',
+ *   authType: 'basic',
  *   schema: function () {},
  *   tables: {
  *     tableOne: {

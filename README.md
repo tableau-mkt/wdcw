@@ -70,6 +70,34 @@ var wrapper = wdcw({
 });
 ```
 
+### Authentication handling
+With the Tableau API...
+```javascript
+var connector = tableau.makeConnector();
+
+connector.init = function (doneCallback) {
+  // Register the authentication type with Tableau.
+  tableau.authType = 'basic';
+
+  if (tableau.phase === tableau.phaseEnum.interactivePhase) {
+    // Listen for form submission, grab values, and register them with Tableau.
+    $('form').submit(function() {
+      tableau.username = $('input[name="username"]').val();
+      tableau.password = $('input[type="password"]').val();
+      tableau.submit();
+    });
+  }
+}
+```
+
+With the WDC wrapper...
+```javascript
+wdcw({
+  name: 'My Web Data Connector',
+  authType: 'basic'
+});
+```
+
 ### Multi-table handling
 With the Tableau API...
 ```javascript
