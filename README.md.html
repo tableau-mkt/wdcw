@@ -171,6 +171,30 @@ var wrapper = wdcw({
   schema: function () {/*...*/},
 });
 </code></pre>
+<h3 id="authentication-handling">Authentication handling</h3>
+<p>With the Tableau API...</p>
+<pre><code class="lang-javascript">var connector = tableau.makeConnector();
+
+connector.init = function (doneCallback) {
+  // Register the authentication type with Tableau.
+  tableau.authType = &#39;basic&#39;;
+
+  if (tableau.phase === tableau.phaseEnum.interactivePhase) {
+    // Listen for form submission, grab values, and register them with Tableau.
+    $(&#39;form&#39;).submit(function() {
+      tableau.username = $(&#39;input[name=&quot;username&quot;]&#39;).val();
+      tableau.password = $(&#39;input[type=&quot;password&quot;]&#39;).val();
+      tableau.submit();
+    });
+  }
+}
+</code></pre>
+<p>With the WDC wrapper...</p>
+<pre><code class="lang-javascript">wdcw({
+  name: &#39;My Web Data Connector&#39;,
+  authType: &#39;basic&#39;
+});
+</code></pre>
 <h3 id="multi-table-handling">Multi-table handling</h3>
 <p>With the Tableau API...</p>
 <pre><code class="lang-javascript">connector.getData = function (table, dataDoneCallback) {

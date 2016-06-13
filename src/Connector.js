@@ -195,3 +195,17 @@ Connector.prototype.promiseErrorHandler = function tableauErrorHandler(e) {
     _tableau.abortWithError(JSON.stringify(e));
   }
 };
+
+/**
+ * Helper method used to determine whether or not authentication is being
+ * attempted for an ad-hoc query (Desktop) or in an automated context (Server).
+ * Useful when dealing with restrictive oauth providers.
+ *
+ * @returns {string}
+ *   The authentication purpose. One of:
+ *   - ephemeral: when the user is authenticating with Tableau Desktop.
+ *   - enduring: when authentication is being performed on Server.
+ */
+Connector.prototype.getAuthPurpose = function getAuthPurpose() {
+  return _tableau.authPurpose;
+};

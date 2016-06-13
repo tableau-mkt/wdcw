@@ -21,6 +21,11 @@ exports = module.exports = function factory(connector, config, $, tableau) {
         $input,
         key;
 
+    // Inform tableau of the authentication type, if provided.
+    if (config.authType) {
+      tableau.authType = config.authType;
+    }
+
     // Auto-fill any inputs with known data values.
     if (tableau.phase === tableau.phaseEnum.interactivePhase) {
       for (key in data) {
