@@ -33,22 +33,43 @@ function Connector(tableau) {
 }
 
 /**
+ * Registers a promise with the connector for a particular table's data. This
+ * promise can be read from and chained via the waitForData method.
  *
- * @param tableId
- * @param promise
- * @returns {*}
+ * @param {string} tableId - The ID of the table for which the given promise is
+ *   being registered.
+ *
+ * @param {Promise} promise - The promise returned by the data retrieval callback
+ *   associated with this table.
+ *
+ * @returns {Promise}
+ * @see wdcw~dataRetrieval
  */
-Connector.prototype.setDataPromise = function setDataPromise(tableId, promise) {
+Connector.prototype.registerDataRetrieval = function regRet(tableId, promise) {
   _this.semaphore[tableId] = promise;
   return promise;
 };
 
 /**
+ * Returns a promise that resolves when data collection for the given table
+ * completes. The promise will resolve with the full set of data returned for
+ * the given table.
  *
- * @param tableId
- * @returns {*}
+ * @param {string} tableId - The ID of the table whose data you are waiting for.
+ *
+ * @returns {Promise}
+ * @throws An error if no data retrieval promise has been registered for the
+ *   given table.
+ *
+ * @see {@link Connector#registerDataRetrieval}
+ *
+ * @example
+ * connector.waitForData('independentTable')
+ *   .then(function (independentTableData) {
+ *     // Do things based on the independentTable's data here.
+ *   });
  */
-Connector.prototype.getDataPromise = function getDataPromise(tableId) {
+Connector.prototype.waitForData = function waitForData(tableId) {
   if (!_this.semaphore.hasOwnProperty(tableId)) {
     throw 'Could not find data gathering semaphore for table: ' + tableId;
   }
@@ -60,14 +81,24 @@ Connector.prototype.getDataPromise = function getDataPromise(tableId) {
  * Extension of the web data connector API that handles complex connection
  * data getting for the implementor.
  *
- * @returns {Object}
+ * @param {?string} key - An optional key to return an individual connection
+ *   detail. If no key is provided, all connection details will be returned.
+ *
+ * @returns {Object|string}
  *   An object representing connection data. Keys are assumed to be form input
- *   names; values are assumed to be form input values.
+ *   names; values are assumed to be form input values. If a key was provided
+ *   as, an individual connection detail will be returned as a string.
  *
  * @see connector.setConnectionData
  */
-Connector.prototype.getConnectionData = function getConnectionData() {
-  return _tableau.connectionData ? JSON.parse(_tableau.connectionData) : {};
+Connector.prototype.getConnectionData = function getConnectionData(key) {
+  var json = _tableau.connectionData ? JSON.parse(_tableau.connectionData) : {};
+
+  if (key) {
+    return json.hasOwnProperty(key) ? json[key] : '';
+  } else {
+    return json;
+  }
 };
 
 /**
@@ -138,27 +169,6 @@ Connector.prototype.setPassword = function setPassword(password) {
 };
 
 /**
- * Extension of the web data connector API that gets the incremental extract
- * column.
- */
-Connector.prototype.getIncrementalExtractColumn = function getExtractColumn() {
-  return _tableau.incrementalExtractColumn;
-};
-
-/**
- * Extension of the web data connectors API that sets the incremental extract
- * column.
- *
- * @param {string} column - The column from the data source on which incremental
- *   extracts should be based. This can be a column that represents either a
- *   DateTime or an integer.
- */
-Connector.prototype.setIncrementalExtractColumn = function setExtract(column) {
-  _tableau.incrementalExtractColumn = column;
-  return column;
-};
-
-/**
  * A generic error handler that can be used by implementors for simplicity.
  *
  * @param {Object} jqXHR
@@ -178,7 +188,7 @@ Connector.prototype.ajaxErrorHandler = function (jqXHR, textStatus, errThrown) {
  *
  * @param e
  */
-Connector.prototype.promiseErrorWrapper = function tableauErrorWrapper(e) {
+Connector.prototype.promiseErrorHandler = function tableauErrorHandler(e) {
   if (typeof e === 'string') {
     _tableau.abortWithError(e);
   } else {

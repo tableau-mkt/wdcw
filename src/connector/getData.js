@@ -44,7 +44,7 @@ exports = module.exports = function (connector, config, tableau, Promise) {
     if (dependencies) {
       try {
         dependentPromise = Promise.all(
-          dependencies.map(connector.getDataPromise)
+          dependencies.map(connector.waitForData)
         );
       }
       catch (e) {
@@ -63,7 +63,7 @@ exports = module.exports = function (connector, config, tableau, Promise) {
 
     dependentPromise
       .then(function (dependentResults) {
-        return connector.setDataPromise(
+        return connector.registerDataRetrieval(
           tableId,
           config.tables[tableId].getData.call(
             connector,
@@ -72,12 +72,12 @@ exports = module.exports = function (connector, config, tableau, Promise) {
             table.appendRows
           )
         );
-      }, connector.promiseErrorWrapper)
-      .then(postProcess, connector.promiseErrorWrapper)
+      }, connector.promiseErrorHandler)
+      .then(postProcess, connector.promiseErrorHandler)
       .then(function (results) {
         table.appendRows(results || []);
         doneCallback();
-      }, connector.promiseErrorWrapper)
-      .catch(connector.promiseErrorWrapper);
+      }, connector.promiseErrorHandler)
+      .catch(connector.promiseErrorHandler);
   };
 };
