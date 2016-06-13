@@ -60,14 +60,24 @@ Connector.prototype.getDataPromise = function getDataPromise(tableId) {
  * Extension of the web data connector API that handles complex connection
  * data getting for the implementor.
  *
- * @returns {Object}
+ * @param {?string} key - An optional key to return an individual connection
+ *   detail. If no key is provided, all connection details will be returned.
+ *
+ * @returns {Object|string}
  *   An object representing connection data. Keys are assumed to be form input
- *   names; values are assumed to be form input values.
+ *   names; values are assumed to be form input values. If a key was provided
+ *   as, an individual connection detail will be returned as a string.
  *
  * @see connector.setConnectionData
  */
-Connector.prototype.getConnectionData = function getConnectionData() {
-  return _tableau.connectionData ? JSON.parse(_tableau.connectionData) : {};
+Connector.prototype.getConnectionData = function getConnectionData(key) {
+  var json = _tableau.connectionData ? JSON.parse(_tableau.connectionData) : {};
+
+  if (key) {
+    return json.hasOwnProperty(key) ? json[key] : '';
+  } else {
+    return json;
+  }
 };
 
 /**
