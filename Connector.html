@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Connector.html">Connector</a><ul class='methods'><li data-type='method'><a href="Connector.html#.getUsername">getUsername</a></li><li data-type='method'><a href="Connector.html#ajaxErrorHandler">ajaxErrorHandler</a></li><li data-type='method'><a href="Connector.html#getConnectionData">getConnectionData</a></li><li data-type='method'><a href="Connector.html#getDataPromise">getDataPromise</a></li><li data-type='method'><a href="Connector.html#getIncrementalExtractColumn">getIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#getPassword">getPassword</a></li><li data-type='method'><a href="Connector.html#promiseErrorWrapper">promiseErrorWrapper</a></li><li data-type='method'><a href="Connector.html#setConnectionData">setConnectionData</a></li><li data-type='method'><a href="Connector.html#setDataPromise">setDataPromise</a></li><li data-type='method'><a href="Connector.html#setIncrementalExtractColumn">setIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#setPassword">setPassword</a></li><li data-type='method'><a href="Connector.html#setUsername">setUsername</a></li></ul></li><li><a href="wdcw.html">wdcw</a><ul class='methods'><li data-type='method'><a href="wdcw.html#getConnector">getConnector</a></li><li data-type='method'><a href="wdcw.html#registerData">registerData</a></li><li data-type='method'><a href="wdcw.html#registerPostProcess">registerPostProcess</a></li><li data-type='method'><a href="wdcw.html#registerSchema">registerSchema</a></li><li data-type='method'><a href="wdcw.html#registerSetup">registerSetup</a></li><li data-type='method'><a href="wdcw.html#registerTeardown">registerTeardown</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Connector.html">Connector</a><ul class='methods'><li data-type='method'><a href="Connector.html#.getUsername">getUsername</a></li><li data-type='method'><a href="Connector.html#ajaxErrorHandler">ajaxErrorHandler</a></li><li data-type='method'><a href="Connector.html#getAuthPurpose">getAuthPurpose</a></li><li data-type='method'><a href="Connector.html#getConnectionData">getConnectionData</a></li><li data-type='method'><a href="Connector.html#getPassword">getPassword</a></li><li data-type='method'><a href="Connector.html#promiseErrorHandler">promiseErrorHandler</a></li><li data-type='method'><a href="Connector.html#registerDataRetrieval">registerDataRetrieval</a></li><li data-type='method'><a href="Connector.html#setConnectionData">setConnectionData</a></li><li data-type='method'><a href="Connector.html#setPassword">setPassword</a></li><li data-type='method'><a href="Connector.html#setUsername">setUsername</a></li><li data-type='method'><a href="Connector.html#waitForData">waitForData</a></li></ul></li><li><a href="wdcw.html">wdcw</a><ul class='methods'><li data-type='method'><a href="wdcw.html#getConnector">getConnector</a></li><li data-type='method'><a href="wdcw.html#registerData">registerData</a></li><li data-type='method'><a href="wdcw.html#registerPostProcess">registerPostProcess</a></li><li data-type='method'><a href="wdcw.html#registerSchema">registerSchema</a></li><li data-type='method'><a href="wdcw.html#registerSetup">registerSetup</a></li><li data-type='method'><a href="wdcw.html#registerTeardown">registerTeardown</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -206,7 +206,7 @@ methods that prevent the need to reach out to the global tableau object.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line97">line 97</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line128">line 128</a>
     </li></ul></dd>
     
 
@@ -405,7 +405,7 @@ methods that prevent the need to reach out to the global tableau object.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line168">line 168</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line178">line 178</a>
     </li></ul></dd>
     
 
@@ -436,15 +436,16 @@ methods that prevent the need to reach out to the global tableau object.</p>
 
     
 
-    <h4 class="name" id="getConnectionData"><span class="type-signature"></span>getConnectionData<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="getAuthPurpose"><span class="type-signature"></span>getAuthPurpose<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
 
     
 
 
 
 <div class="description">
-    <p>Extension of the web data connector API that handles complex connection
-data getting for the implementor.</p>
+    <p>Helper method used to determine whether or not authentication is being
+attempted for an ad-hoc query (Desktop) or in an automated context (Server).
+Useful when dealing with restrictive oauth providers.</p>
 </div>
 
 
@@ -488,19 +489,12 @@ data getting for the implementor.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line69">line 69</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line209">line 209</a>
     </li></ul></dd>
     
 
     
 
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li>connector.setConnectionData</li>
-        </ul>
-    </dd>
     
 
     
@@ -522,8 +516,11 @@ data getting for the implementor.</p>
 
         
 <div class="param-desc">
-    <p>An object representing connection data. Keys are assumed to be form input
-  names; values are assumed to be form input values.</p>
+    <p>The authentication purpose. One of:</p>
+<ul>
+<li>ephemeral: when the user is authenticating with Tableau Desktop.</li>
+<li>enduring: when authentication is being performed on Server.</li>
+</ul>
 </div>
 
 
@@ -534,7 +531,7 @@ data getting for the implementor.</p>
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">string</span>
 
 
     </dd>
@@ -549,11 +546,16 @@ data getting for the implementor.</p>
 
     
 
-    <h4 class="name" id="getDataPromise"><span class="type-signature"></span>getDataPromise<span class="signature">(tableId)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id="getConnectionData"><span class="type-signature"></span>getConnectionData<span class="signature">(key<span class="signature-attributes">nullable</span>)</span><span class="type-signature"> &rarr; {Object|string}</span></h4>
 
     
 
 
+
+<div class="description">
+    <p>Extension of the web data connector API that handles complex connection
+data getting for the implementor.</p>
+</div>
 
 
 
@@ -576,6 +578,8 @@ data getting for the implementor.</p>
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
         
 
@@ -588,18 +592,34 @@ data getting for the implementor.</p>
 
         <tr>
             
-                <td class="name"><code>tableId</code></td>
+                <td class="name"><code>key</code></td>
             
 
             <td class="type">
             
+                
+<span class="param-type">string</span>
+
+
+            
             </td>
 
             
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>An optional key to return an individual connection
+  detail. If no key is provided, all connection details will be returned.</p></td>
         </tr>
 
     
@@ -640,12 +660,19 @@ data getting for the implementor.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line51">line 51</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line94">line 94</a>
     </li></ul></dd>
     
 
     
 
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>connector.setConnectionData</li>
+        </ul>
+    </dd>
     
 
     
@@ -666,6 +693,12 @@ data getting for the implementor.</p>
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>An object representing connection data. Keys are assumed to be form input
+  names; values are assumed to be form input values. If a key was provided
+  as, an individual connection detail will be returned as a string.</p>
+</div>
+
 
 
 <dl class="param-type">
@@ -674,96 +707,16 @@ data getting for the implementor.</p>
     </dt>
     <dd>
         
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">string</span>
 
 
     </dd>
 </dl>
 
     
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="getIncrementalExtractColumn"><span class="type-signature"></span>getIncrementalExtractColumn<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Extension of the web data connector API that gets the incremental extract
-column.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line144">line 144</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -823,7 +776,7 @@ column.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line121">line 121</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line152">line 152</a>
     </li></ul></dd>
     
 
@@ -876,7 +829,7 @@ column.</p>
 
     
 
-    <h4 class="name" id="promiseErrorWrapper"><span class="type-signature"></span>promiseErrorWrapper<span class="signature">(e)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="promiseErrorHandler"><span class="type-signature"></span>promiseErrorHandler<span class="signature">(e)</span><span class="type-signature"></span></h4>
 
     
 
@@ -971,7 +924,7 @@ column.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line181">line 181</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line191">line 191</a>
     </li></ul></dd>
     
 
@@ -994,6 +947,188 @@ column.</p>
 
 
 
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="registerDataRetrieval"><span class="type-signature"></span>registerDataRetrieval<span class="signature">(tableId, promise)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Registers a promise with the connector for a particular table's data. This
+promise can be read from and chained via the waitForData method.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tableId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the table for which the given promise is
+  being registered.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>promise</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Promise</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The promise returned by the data retrieval callback
+  associated with this table.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line48">line 48</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="wdcw.html#~dataRetrieval">wdcw~dataRetrieval</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1105,7 +1240,7 @@ data setting for the implementor.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line86">line 86</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line117">line 117</a>
     </li></ul></dd>
     
 
@@ -1157,298 +1292,6 @@ data setting for the implementor.</p>
 </dl>
 
     
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="setDataPromise"><span class="type-signature"></span>setDataPromise<span class="signature">(tableId, promise)</span><span class="type-signature"> &rarr; {*}</span></h4>
-
-    
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>tableId</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>promise</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line41">line 41</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">*</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="setIncrementalExtractColumn"><span class="type-signature"></span>setIncrementalExtractColumn<span class="signature">(column)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    <p>Extension of the web data connectors API that sets the incremental extract
-column.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>column</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The column from the data source on which incremental
-  extracts should be based. This can be a column that represents either a
-  DateTime or an integer.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line156">line 156</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1559,7 +1402,7 @@ column.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line135">line 135</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line166">line 166</a>
     </li></ul></dd>
     
 
@@ -1712,7 +1555,7 @@ column.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line110">line 110</a>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line141">line 141</a>
     </li></ul></dd>
     
 
@@ -1761,6 +1604,185 @@ column.</p>
 
 
         
+            
+
+    
+
+    <h4 class="name" id="waitForData"><span class="type-signature"></span>waitForData<span class="signature">(tableId)</span><span class="type-signature"> &rarr; {Promise}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Returns a promise that resolves when data collection for the given table
+completes. The promise will resolve with the full set of data returned for
+the given table.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tableId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the table whose data you are waiting for.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Connector.js.html">Connector.js</a>, <a href="Connector.js.html#line72">line 72</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="Connector.html#registerDataRetrieval">Connector#registerDataRetrieval</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        <p>An error if no data retrieval promise has been registered for the
+  given table.</p>
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>connector.waitForData('independentTable')
+  .then(function (independentTableData) {
+    // Do things based on the independentTable's data here.
+  });</code></pre>
+
+
+
+        
     
 
     
@@ -1778,7 +1800,7 @@ column.</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Jun 12 2016 16:40:56 GMT-0700 (PDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Jun 12 2016 18:05:09 GMT-0700 (PDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

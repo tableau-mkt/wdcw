@@ -23,7 +23,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Connector.html">Connector</a><ul class='methods'><li data-type='method'><a href="Connector.html#.getUsername">getUsername</a></li><li data-type='method'><a href="Connector.html#ajaxErrorHandler">ajaxErrorHandler</a></li><li data-type='method'><a href="Connector.html#getConnectionData">getConnectionData</a></li><li data-type='method'><a href="Connector.html#getDataPromise">getDataPromise</a></li><li data-type='method'><a href="Connector.html#getIncrementalExtractColumn">getIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#getPassword">getPassword</a></li><li data-type='method'><a href="Connector.html#promiseErrorWrapper">promiseErrorWrapper</a></li><li data-type='method'><a href="Connector.html#setConnectionData">setConnectionData</a></li><li data-type='method'><a href="Connector.html#setDataPromise">setDataPromise</a></li><li data-type='method'><a href="Connector.html#setIncrementalExtractColumn">setIncrementalExtractColumn</a></li><li data-type='method'><a href="Connector.html#setPassword">setPassword</a></li><li data-type='method'><a href="Connector.html#setUsername">setUsername</a></li></ul></li><li><a href="wdcw.html">wdcw</a><ul class='methods'><li data-type='method'><a href="wdcw.html#getConnector">getConnector</a></li><li data-type='method'><a href="wdcw.html#registerData">registerData</a></li><li data-type='method'><a href="wdcw.html#registerPostProcess">registerPostProcess</a></li><li data-type='method'><a href="wdcw.html#registerSchema">registerSchema</a></li><li data-type='method'><a href="wdcw.html#registerSetup">registerSetup</a></li><li data-type='method'><a href="wdcw.html#registerTeardown">registerTeardown</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Connector.html">Connector</a><ul class='methods'><li data-type='method'><a href="Connector.html#.getUsername">getUsername</a></li><li data-type='method'><a href="Connector.html#ajaxErrorHandler">ajaxErrorHandler</a></li><li data-type='method'><a href="Connector.html#getAuthPurpose">getAuthPurpose</a></li><li data-type='method'><a href="Connector.html#getConnectionData">getConnectionData</a></li><li data-type='method'><a href="Connector.html#getPassword">getPassword</a></li><li data-type='method'><a href="Connector.html#promiseErrorHandler">promiseErrorHandler</a></li><li data-type='method'><a href="Connector.html#registerDataRetrieval">registerDataRetrieval</a></li><li data-type='method'><a href="Connector.html#setConnectionData">setConnectionData</a></li><li data-type='method'><a href="Connector.html#setPassword">setPassword</a></li><li data-type='method'><a href="Connector.html#setUsername">setUsername</a></li><li data-type='method'><a href="Connector.html#waitForData">waitForData</a></li></ul></li><li><a href="wdcw.html">wdcw</a><ul class='methods'><li data-type='method'><a href="wdcw.html#getConnector">getConnector</a></li><li data-type='method'><a href="wdcw.html#registerData">registerData</a></li><li data-type='method'><a href="wdcw.html#registerPostProcess">registerPostProcess</a></li><li data-type='method'><a href="wdcw.html#registerSchema">registerSchema</a></li><li data-type='method'><a href="wdcw.html#registerSetup">registerSetup</a></li><li data-type='method'><a href="wdcw.html#registerTeardown">registerTeardown</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -73,22 +73,43 @@ function Connector(tableau) {
 }
 
 /**
+ * Registers a promise with the connector for a particular table's data. This
+ * promise can be read from and chained via the waitForData method.
  *
- * @param tableId
- * @param promise
- * @returns {*}
+ * @param {string} tableId - The ID of the table for which the given promise is
+ *   being registered.
+ *
+ * @param {Promise} promise - The promise returned by the data retrieval callback
+ *   associated with this table.
+ *
+ * @returns {Promise}
+ * @see wdcw~dataRetrieval
  */
-Connector.prototype.setDataPromise = function setDataPromise(tableId, promise) {
+Connector.prototype.registerDataRetrieval = function regRet(tableId, promise) {
   _this.semaphore[tableId] = promise;
   return promise;
 };
 
 /**
+ * Returns a promise that resolves when data collection for the given table
+ * completes. The promise will resolve with the full set of data returned for
+ * the given table.
  *
- * @param tableId
- * @returns {*}
+ * @param {string} tableId - The ID of the table whose data you are waiting for.
+ *
+ * @returns {Promise}
+ * @throws An error if no data retrieval promise has been registered for the
+ *   given table.
+ *
+ * @see {@link Connector#registerDataRetrieval}
+ *
+ * @example
+ * connector.waitForData('independentTable')
+ *   .then(function (independentTableData) {
+ *     // Do things based on the independentTable's data here.
+ *   });
  */
-Connector.prototype.getDataPromise = function getDataPromise(tableId) {
+Connector.prototype.waitForData = function waitForData(tableId) {
   if (!_this.semaphore.hasOwnProperty(tableId)) {
     throw 'Could not find data gathering semaphore for table: ' + tableId;
   }
@@ -100,14 +121,24 @@ Connector.prototype.getDataPromise = function getDataPromise(tableId) {
  * Extension of the web data connector API that handles complex connection
  * data getting for the implementor.
  *
- * @returns {Object}
+ * @param {?string} key - An optional key to return an individual connection
+ *   detail. If no key is provided, all connection details will be returned.
+ *
+ * @returns {Object|string}
  *   An object representing connection data. Keys are assumed to be form input
- *   names; values are assumed to be form input values.
+ *   names; values are assumed to be form input values. If a key was provided
+ *   as, an individual connection detail will be returned as a string.
  *
  * @see connector.setConnectionData
  */
-Connector.prototype.getConnectionData = function getConnectionData() {
-  return _tableau.connectionData ? JSON.parse(_tableau.connectionData) : {};
+Connector.prototype.getConnectionData = function getConnectionData(key) {
+  var json = _tableau.connectionData ? JSON.parse(_tableau.connectionData) : {};
+
+  if (key) {
+    return json.hasOwnProperty(key) ? json[key] : '';
+  } else {
+    return json;
+  }
 };
 
 /**
@@ -178,27 +209,6 @@ Connector.prototype.setPassword = function setPassword(password) {
 };
 
 /**
- * Extension of the web data connector API that gets the incremental extract
- * column.
- */
-Connector.prototype.getIncrementalExtractColumn = function getExtractColumn() {
-  return _tableau.incrementalExtractColumn;
-};
-
-/**
- * Extension of the web data connectors API that sets the incremental extract
- * column.
- *
- * @param {string} column - The column from the data source on which incremental
- *   extracts should be based. This can be a column that represents either a
- *   DateTime or an integer.
- */
-Connector.prototype.setIncrementalExtractColumn = function setExtract(column) {
-  _tableau.incrementalExtractColumn = column;
-  return column;
-};
-
-/**
  * A generic error handler that can be used by implementors for simplicity.
  *
  * @param {Object} jqXHR
@@ -218,12 +228,26 @@ Connector.prototype.ajaxErrorHandler = function (jqXHR, textStatus, errThrown) {
  *
  * @param e
  */
-Connector.prototype.promiseErrorWrapper = function tableauErrorWrapper(e) {
+Connector.prototype.promiseErrorHandler = function tableauErrorHandler(e) {
   if (typeof e === 'string') {
     _tableau.abortWithError(e);
   } else {
     _tableau.abortWithError(JSON.stringify(e));
   }
+};
+
+/**
+ * Helper method used to determine whether or not authentication is being
+ * attempted for an ad-hoc query (Desktop) or in an automated context (Server).
+ * Useful when dealing with restrictive oauth providers.
+ *
+ * @returns {string}
+ *   The authentication purpose. One of:
+ *   - ephemeral: when the user is authenticating with Tableau Desktop.
+ *   - enduring: when authentication is being performed on Server.
+ */
+Connector.prototype.getAuthPurpose = function getAuthPurpose() {
+  return _tableau.authPurpose;
 };
 </code></pre>
         </article>
@@ -237,7 +261,7 @@ Connector.prototype.promiseErrorWrapper = function tableauErrorWrapper(e) {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Jun 12 2016 16:40:56 GMT-0700 (PDT) using the Minami theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Jun 12 2016 18:05:09 GMT-0700 (PDT) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
