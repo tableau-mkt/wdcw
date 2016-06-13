@@ -31,8 +31,8 @@ module.exports = function(grunt) {
       unittests_browsertest_index_html_template: 'index.html.template',
       unittests_browsertest_index_html: 'index.html',
       // Final file
-      output_file: '<%= pkg.name %>.<%= pkg.version %>.standalone.js',
-      minimized_output_file: '<%= pkg.name %>.<%= pkg.version %>.standalone.min.js',
+      output_file: '<%= pkg.name %>.js',
+      minimized_output_file: '<%= pkg.name %>.min.js',
       banner_for_production: '/*! <%= pkg.name %>.<%= pkg.version %>.<%= grunt.template.today("h:MM:ss yyyy-mm-dd") %> */\n'
     },
     browserify: {
