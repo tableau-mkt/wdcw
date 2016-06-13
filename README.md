@@ -7,25 +7,15 @@ Tableau web data connectors.
 
 Still under active development! Use at your own risk.
 
-<!---
-1. wdcw.js : your unminimized library as produced by the "browserify:standalone" step in Gruntfile.js
-2. wdcw.min.js : your minimized library as produced by the "uglify:all" step in Gruntfile.js
-3. 2.0.0-beta.1 : the package version which is read from package.json.
-
-Below, there is a sample "Downloads" section to show you how to use these 3 variables.
-
-The output of "replace:dist" is your README.md file. The "markdown:all" step will also produce the html
-equivalent of your README.md so that you can put this on your own website.
-
-## Downloads ##
-
-* [Version 2.0.0-beta.1, minimized, 4.4K : https://github.com/tableau-mkt/wdcw/wdcw.min.js](https://github.com/tableau-mkt/wdcw/wdcw.min.js)
-* [Version 2.0.0-beta.1, un-minimized, 13K : https://github.com/tableau-mkt/wdcw/wdcw.js](https://github.com/tableau-mkt/wdcw/wdcw.js)
--->
-
 ## Installation & Usage
 
-The recommended way to install this library is via [bower](https://bower.io/)!
+If you don't use bower, you can get started by downloading here:
+
+* [Version 2.0.0-beta.1, minimized, 6K](https://rawgit.com/tableau-mkt/wdcw/2.0.0-beta.1/dist/wdcw.min.js)
+* [Version 2.0.0-beta.1, un-minimized, 23K](https://rawgit.com/tableau-mkt/wdcw/2.0.0-beta.1/dist/wdcw.js)
+
+However, we do highly recommend downloading and installing this library via
+[bower](https://bower.io/)!
 
 ```sh
 bower install wdcw --save
@@ -51,6 +41,9 @@ In any web page:
   });
 </script>
 ```
+
+Full [Web Data Connecter Wrapper API documentation](https://tableau-mkt.github.io/wdcw/)
+is also available.
 
 ## Enhancements and differences vs. the native WDC API
 

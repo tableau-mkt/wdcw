@@ -117,23 +117,14 @@
 <p>This JavaScript library aims to simplify the way you write and instantiate
 Tableau web data connectors.</p>
 <p>Still under active development! Use at your own risk.</p>
-<!---
-1. wdcw.js : your unminimized library as produced by the "browserify:standalone" step in Gruntfile.js
-2. wdcw.min.js : your minimized library as produced by the "uglify:all" step in Gruntfile.js
-3. 2.0.0-beta.1 : the package version which is read from package.json.
-
-Below, there is a sample "Downloads" section to show you how to use these 3 variables.
-
-The output of "replace:dist" is your README.md file. The "markdown:all" step will also produce the html
-equivalent of your README.md so that you can put this on your own website.
-
-## Downloads ##
-
-* [Version 2.0.0-beta.1, minimized, 4.4K : https://github.com/tableau-mkt/wdcw/wdcw.min.js](https://github.com/tableau-mkt/wdcw/wdcw.min.js)
-* [Version 2.0.0-beta.1, un-minimized, 13K : https://github.com/tableau-mkt/wdcw/wdcw.js](https://github.com/tableau-mkt/wdcw/wdcw.js)
--->
 <h2 id="installation-usage">Installation &amp; Usage</h2>
-<p>The recommended way to install this library is via <a href="https://bower.io/">bower</a>!</p>
+<p>If you don&#39;t use bower, you can get started by downloading here:</p>
+<ul>
+<li><a href="https://rawgit.com/tableau-mkt/wdcw/2.0.0-beta.1/dist/wdcw.min.js">Version 2.0.0-beta.1, minimized, 6K</a></li>
+<li><a href="https://rawgit.com/tableau-mkt/wdcw/2.0.0-beta.1/dist/wdcw.js">Version 2.0.0-beta.1, un-minimized, 23K</a></li>
+</ul>
+<p>However, we do highly recommend downloading and installing this library via
+<a href="https://bower.io/">bower</a>!</p>
 <pre><code class="lang-sh">bower install wdcw --save
 </code></pre>
 <p>In any web page:</p>
@@ -155,6 +146,8 @@ equivalent of your README.md so that you can put this on your own website.
   });
 &lt;/script&gt;
 </code></pre>
+<p>Full <a href="https://tableau-mkt.github.io/wdcw/">Web Data Connecter Wrapper API documentation</a>
+is also available.</p>
 <h2 id="enhancements-and-differences-vs-the-native-wdc-api">Enhancements and differences vs. the native WDC API</h2>
 <h3 id="instantiation">Instantiation</h3>
 <p>With the Tableau API...</p>
