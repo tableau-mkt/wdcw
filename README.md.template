@@ -28,7 +28,7 @@ In any web page:
 <script src="/bower_components/es6-promise/es6-promise.min.js"></script>
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="https://connectors.tableau.com/libs/tableauwdc-2.0.0-beta.js"></script>
-<script src="/bower_components/wdcw/dist/@@minimized_file)"></script>
+<script src="/bower_components/wdcw/dist/@@minimized_file"></script>
 <script>
   // Instantiate your WDC and supply custom WDC logic.
   var wrapper = wdcw({

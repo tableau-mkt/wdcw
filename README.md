@@ -28,7 +28,7 @@ In any web page:
 <script src="/bower_components/es6-promise/es6-promise.min.js"></script>
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="https://connectors.tableau.com/libs/tableauwdc-2.0.0-beta.js"></script>
-<script src="/bower_components/wdcw/dist/wdcw.min.js)"></script>
+<script src="/bower_components/wdcw/dist/wdcw.min.js"></script>
 <script>
   // Instantiate your WDC and supply custom WDC logic.
   var wrapper = wdcw({
@@ -123,7 +123,7 @@ connector.getData = function(table, dataDoneCallback) {
 With the WDC Wrapper...
 ```html
 <form>
-  <input type="text" name="SomeConfiguration" />
+  <input type="text" name="SomeConfig" />
   <select name="SelectableConfig">
     <option value="Opt1">Option 1</option>
     <option value="Opt2">Option 2</option>
