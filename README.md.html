@@ -113,32 +113,27 @@
   </head>
   <body>  
     <h1 id="web-data-connector-wrapper">Web Data Connector Wrapper</h1>
-<p><a href="https://travis-ci.org/tableau-mkt/wdcw"><img src="https://travis-ci.org/tableau-mkt/wdcw.svg?branch=master" alt="Build Status"></a><a href="https://badge.fury.io/js/wdcw"><img src="https://badge.fury.io/js/wdcw.svg" alt="npm version"></a></p>
+<p><a href="https://travis-ci.org/tableau-mkt/wdcw"><img src="https://travis-ci.org/tableau-mkt/wdcw.svg?branch=master" alt="Build Status"></a></p>
 <p>This JavaScript library aims to simplify the way you write and instantiate
 Tableau web data connectors.</p>
 <p>Still under active development! Use at your own risk.</p>
-<!---
-1. wdcw.2.0.0.standalone.js : your unminimized library as produced by the "browserify:standalone" step in Gruntfile.js
-2. wdcw.2.0.0.standalone.min.js : your minimized library as produced by the "uglify:all" step in Gruntfile.js
-3. 2.0.0 : the package version which is read from package.json.
-
-Below, there is a sample "Downloads" section to show you how to use these 3 variables.
-
-The output of "replace:dist" is your README.md file. The "markdown:all" step will also produce the html
-equivalent of your README.md so that you can put this on your own website.
-
-## Downloads ##
-
-* [Version 2.0.0, minimized, 4.4K : https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.min.js](https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.min.js)
-* [Version 2.0.0, un-minimized, 13K : https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.js](https://github.com/tableau-mkt/wdcw/wdcw.2.0.0.standalone.js)
--->
-<h2 id="usage">Usage</h2>
+<h2 id="installation-usage">Installation &amp; Usage</h2>
+<p>If you don&#39;t use bower, you can get started by downloading here:</p>
+<ul>
+<li><a href="https://rawgit.com/tableau-mkt/wdcw/2.0.0-beta.1/dist/wdcw.min.js">Version 2.0.0-beta.1, minimized, 6K</a></li>
+<li><a href="https://rawgit.com/tableau-mkt/wdcw/2.0.0-beta.1/dist/wdcw.js">Version 2.0.0-beta.1, un-minimized, 23K</a></li>
+</ul>
+<p>However, we do highly recommend downloading and installing this library via
+<a href="https://bower.io/">bower</a>!</p>
+<pre><code class="lang-sh">bower install wdcw --save
+</code></pre>
 <p>In any web page:</p>
-<pre><code class="lang-html">// Requires ES6 Promise Shim, jQuery, and the Tableau WDC API (v2.0.0+)
-&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/es6-promise/3.2.2/es6-promise.min.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;https://code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt;
+<pre><code class="lang-html">// Requires ES6 Promises (either a shim or a library like bluebird is fine),
+// As well as jQuery and, naturally, the Tableau WDC API (v2.0.0+)
+&lt;script src=&quot;/bower_components/es6-promise/es6-promise.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/bower_components/jquery/dist/jquery.min.js&quot;&gt;&lt;/script&gt;
 &lt;script src=&quot;https://connectors.tableau.com/libs/tableauwdc-2.0.0-beta.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;/path/to/wdcw.2.0.0.standalone.min.js)&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/bower_components/wdcw/dist/wdcw.min.js)&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
   // Instantiate your WDC and supply custom WDC logic.
   var wrapper = wdcw({
@@ -151,6 +146,8 @@ equivalent of your README.md so that you can put this on your own website.
   });
 &lt;/script&gt;
 </code></pre>
+<p>Full <a href="https://tableau-mkt.github.io/wdcw/">Web Data Connecter Wrapper API documentation</a>
+is also available.</p>
 <h2 id="enhancements-and-differences-vs-the-native-wdc-api">Enhancements and differences vs. the native WDC API</h2>
 <h3 id="instantiation">Instantiation</h3>
 <p>With the Tableau API...</p>

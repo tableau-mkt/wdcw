@@ -3,8 +3,7 @@
  * @licence MIT
  * @author Eric Peterson
  *
- * @file Entry Point to Web Data Connector Wrapper
- *       Replace it with your own code.
+ * @file Primary entry point for instantiating wrapped Web Data Connectors.
  */
 
 // jscs:disable disallowMultipleVarDecl,safeContextKeyword

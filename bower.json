@@ -1,0 +1,28 @@
+{
+  "name": "wdcw",
+  "version": "2.0.0-beta.1",
+  "main": "dist/wdcw.js",
+  "ignore": [
+    "src",
+    "test",
+    "docs",
+    "lib",
+    ".editorconfig",
+    ".flowconfig",
+    ".gitignore",
+    ".jscsrc",
+    ".travis.yml",
+    "Gruntfile.js",
+    "HOW_TO_GUIDE.md",
+    "jsdoc.conf",
+    "LICENSE.md",
+    "package.json",
+    "README.md",
+    "README.md.html",
+    "README.md.template"
+  ],
+  "dependencies": {
+    "es6-promise": "*",
+    "jquery": "*"
+  }
+}
