@@ -33,22 +33,43 @@ function Connector(tableau) {
 }
 
 /**
+ * Registers a promise with the connector for a particular table's data. This
+ * promise can be read from and chained via the waitForData method.
  *
- * @param tableId
- * @param promise
- * @returns {*}
+ * @param {string} tableId - The ID of the table for which the given promise is
+ *   being registered.
+ *
+ * @param {Promise} promise - The promise returned by the data retrieval callback
+ *   associated with this table.
+ *
+ * @returns {Promise}
+ * @see wdcw~dataRetrieval
  */
-Connector.prototype.setDataPromise = function setDataPromise(tableId, promise) {
+Connector.prototype.registerDataRetrieval = function regRet(tableId, promise) {
   _this.semaphore[tableId] = promise;
   return promise;
 };
 
 /**
+ * Returns a promise that resolves when data collection for the given table
+ * completes. The promise will resolve with the full set of data returned for
+ * the given table.
  *
- * @param tableId
- * @returns {*}
+ * @param {string} tableId - The ID of the table whose data you are waiting for.
+ *
+ * @returns {Promise}
+ * @throws An error if no data retrieval promise has been registered for the
+ *   given table.
+ *
+ * @see {@link Connector#registerDataRetrieval}
+ *
+ * @example
+ * connector.waitForData('independentTable')
+ *   .then(function (independentTableData) {
+ *     // Do things based on the independentTable's data here.
+ *   });
  */
-Connector.prototype.getDataPromise = function getDataPromise(tableId) {
+Connector.prototype.waitForData = function waitForData(tableId) {
   if (!_this.semaphore.hasOwnProperty(tableId)) {
     throw 'Could not find data gathering semaphore for table: ' + tableId;
   }

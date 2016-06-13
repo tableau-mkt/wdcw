@@ -44,7 +44,7 @@ exports = module.exports = function (connector, config, tableau, Promise) {
     if (dependencies) {
       try {
         dependentPromise = Promise.all(
-          dependencies.map(connector.getDataPromise)
+          dependencies.map(connector.waitForData)
         );
       }
       catch (e) {
@@ -63,7 +63,7 @@ exports = module.exports = function (connector, config, tableau, Promise) {
 
     dependentPromise
       .then(function (dependentResults) {
-        return connector.setDataPromise(
+        return connector.registerDataRetrieval(
           tableId,
           config.tables[tableId].getData.call(
             connector,
