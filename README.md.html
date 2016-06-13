@@ -168,6 +168,77 @@ var wrapper = wdcw({
   schema: function () {/*...*/},
 });
 </code></pre>
+<h3 id="connection-data-configuration-handling">Connection data / configuration handling</h3>
+<p>With the Tableau API...</p>
+<pre><code class="lang-html">&lt;form&gt;
+  &lt;input type=&quot;text&quot; name=&quot;SomeConfig&quot; /&gt;
+  &lt;select name=&quot;SelectableConfig&quot;&gt;
+    &lt;option value=&quot;Opt1&quot;&gt;Option 1&lt;/option&gt;
+    &lt;option value=&quot;Opt2&quot;&gt;Option 2&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Connect&quot; /&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+var connector = tableau.makeConnector();
+
+connector.init = function(initCallback) {
+  // Attach a form submit handler during the interactive phase.
+  if (tableau.phase === tableau.phaseEnum.interactivePhase) {
+    $(&#39;form&#39;).submit(function connectorFormSubmitHandler(event) {
+      var connectionData = {};
+
+      // Prevent the form from actually being submitted/processed.
+      event.preventDefault();
+
+      // Pull configuration values from the DOM.
+      connectionData.SomeConfig = $(&#39;input[name=&quot;SomeConfig&quot;]&#39;).val();
+      connectionData.SelectableConfig = $(&#39;select[name=&quot;SelectableConfig&quot;]&#39;).val();
+
+      // Serialize the config data as JSON
+      tableau.connectionData = JSON.stringify(connectionData);
+      tableau.submit();
+    }
+  }
+
+  initCallback();
+};
+
+connector.getData = function(table, dataDoneCallback) {
+  // Unserialize the config data from Tableau.
+  var config = JSON.parse(tableau.connectionData);
+
+  // Use the config in your data getter
+  $.getJSON(&#39;/table/&#39; + table.tableInfo.id + &#39;.json?config=&#39; + config.SomeConfig, function(data) {
+    table.appendRows(data);
+    dataDoneCallback();
+  });
+};
+&lt;/script&gt;
+</code></pre>
+<p>With the WDC Wrapper...</p>
+<pre><code class="lang-html">&lt;form&gt;
+  &lt;input type=&quot;text&quot; name=&quot;SomeConfiguration&quot; /&gt;
+  &lt;select name=&quot;SelectableConfig&quot;&gt;
+    &lt;option value=&quot;Opt1&quot;&gt;Option 1&lt;/option&gt;
+    &lt;option value=&quot;Opt2&quot;&gt;Option 2&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Connect&quot; /&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+var wrapper = wdcw({name: &#39;My Web Data Connector&#39;});
+
+// The wrapper automatically retrieves and stores form inputs, keyed on their
+// &quot;name&quot; attribute. You can retrieve them via the getConnectionData method.
+wrapper.registerData(&#39;someTableId&#39;, function () {
+  var connector = this,
+      someConfig = connector.getConnectionData(&#39;SomeConfig&#39;);
+
+  return $.when($.getJSON(&#39;/table/someTableId.json?config=&#39; + someConfig));
+});
+&lt;/script&gt;
+</code></pre>
 <h3 id="authentication-handling">Authentication handling</h3>
 <p>With the Tableau API...</p>
 <pre><code class="lang-javascript">var connector = tableau.makeConnector();
@@ -187,7 +258,9 @@ connector.init = function (doneCallback) {
 }
 </code></pre>
 <p>With the WDC wrapper...</p>
-<pre><code class="lang-javascript">wdcw({
+<pre><code class="lang-javascript">// The WDC Wrapper automatically stores inputs named &quot;username&quot; or &quot;password&quot; on
+// their respective native tableau.username and tableau.password properties.
+wdcw({
   name: &#39;My Web Data Connector&#39;,
   authType: &#39;basic&#39;
 });
